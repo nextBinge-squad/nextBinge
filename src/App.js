@@ -7,6 +7,8 @@ import axios from 'axios';
 // data
 import tvShow from './data/tvShow';
 
+const MAX_PAGES = 216;
+
 function App() {
 
   const [shows, setShows] = useState([]);
