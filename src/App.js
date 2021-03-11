@@ -16,11 +16,10 @@ function App() {
         per_page: 30
       }
     }).then( (res) => {
-      
-      
+      setData([]);
     })
 
-  })
+  }, []);
 
   return (
     <h1>nextBinge</h1>
