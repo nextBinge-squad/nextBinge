@@ -1,13 +1,12 @@
 import './App.css';
 import axios from 'axios';
-import {useState, useEffect} from 'react';
+import { useState } from 'react';
 
 function App() {
 
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    
+  const request = () => {
     axios({
       url: 'https://api.unsplash.com/search/photos',
       params: {
@@ -15,14 +14,17 @@ function App() {
         query: 'puppies',
         per_page: 30
       }
-    }).then( (res) => {
-      setData([]);
+    }).then((res) => {
+      // setData([]);
+      console.log(res);
     })
-
-  }, []);
+  }
 
   return (
-    <h1>nextBinge</h1>
+    <>
+      <h1>nextBinge</h1>
+      <button onClick={request}>request</button>
+    </>
   );
 }
 
