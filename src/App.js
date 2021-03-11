@@ -8,22 +8,18 @@ function App() {
 
   const request = () => {
     axios({
-      url: 'https://api.unsplash.com/search/photos',
+      url: 'https://api.tvmaze.com/search/shows',
       params: {
-        client_id: 'DVkpqhjTJAEw1t_glS_nIrrxXdxoC32jbO6F3FoEtjA',
-        query: 'puppies',
-        per_page: 30
+        q: 'a',
       }
-    }).then((res) => {
-      // setData([]);
-      console.log(res);
-    })
+    }).then(({ data }) => setData(data));
   }
 
   return (
     <>
       <h1>nextBinge</h1>
       <button onClick={request}>request</button>
+      <button onClick={() => console.log(data)}>log results</button>
     </>
   );
 }
