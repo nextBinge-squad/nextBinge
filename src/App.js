@@ -8,6 +8,11 @@ import axios from 'axios';
 import tvShow from './data/tvShow';
 
 const MAX_PAGES = 216;
+// 1. pick a random number between 1 and MAX_PAGES
+// 2. query api.tvmaze.com/shows at page = random number
+// 3. display all tv shows on that page
+// 3a. filter if necessary (based on user input)
+// 3b. sort if necessary (alphabetical default, etc)
 
 function App() {
 
