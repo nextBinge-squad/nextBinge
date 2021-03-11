@@ -1,6 +1,11 @@
+// css
 import './App.css';
-import axios from 'axios';
+// hooks
 import { useState } from 'react';
+// 3rd party
+import axios from 'axios';
+// data
+import tvShow from './data/tvShow';
 
 function App() {
 
@@ -12,7 +17,10 @@ function App() {
       params: {
         q: 'a',
       }
-    }).then(({ data }) => setData(data));
+    }).then(({ data }) => {
+      console.log(data[0].show);
+      setData(data);
+    });
   }
 
   return (
