@@ -9,25 +9,30 @@ import tvShow from './data/tvShow';
 
 function App() {
 
-  const [data, setData] = useState([]);
+  const [shows, setShows] = useState([]);
 
   const request = () => {
     axios({
       url: 'https://api.tvmaze.com/search/shows',
       params: {
-        q: 'a',
+        q: 'x',
       }
-    }).then(({ data }) => {
-      console.log(data[0].show);
-      setData(data);
-    });
+    }).then(({ data }) => setShows(data.map(
+      ({ show }) => new tvShow(show)
+    )));
   }
 
   return (
     <>
       <h1>nextBinge</h1>
       <button onClick={request}>request</button>
-      <button onClick={() => console.log(data)}>log results</button>
+
+      <ul>
+        {shows ? shows.map(show =>
+          <li dangerouslySetInnerHTML={{__html: show.summary}}></li>
+        ) : "no shows"}
+      </ul>
+
     </>
   );
 }

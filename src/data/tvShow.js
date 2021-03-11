@@ -15,8 +15,13 @@ class tvShow {
   }) {
     this.name = name;
     this.genres = [...genres];
-    this.image = image.medium;
-    this.summary = summary;
+    this.summary = summary ?
+      summary :
+      `<b>${name}</b> is a show about stuff and things. 7/10.`;
+
+    if (image) {
+      this.image = image.medium;
+    }
 
     if (network) {
       this.network = network.name;
