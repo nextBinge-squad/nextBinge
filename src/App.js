@@ -1,11 +1,14 @@
 // css
 import './App.css';
 // hooks
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // 3rd party
 import axios from 'axios';
 // data
 import tvShow from './data/tvShow';
+// firebase
+import firebase from './firebase-config';
+import { dbref, pathref } from './firebase-config';
 
 const MAX_PAGES = 216;
 // 1. pick a random number between 1 and MAX_PAGES
@@ -17,6 +20,12 @@ const MAX_PAGES = 216;
 function App() {
 
   const [shows, setShows] = useState([]);
+
+  useEffect(() => {
+    dbref.on('value', data => {
+      console.log(data.val());
+    })
+  }, []);
 
   const request = () => {
     axios({
@@ -36,7 +45,7 @@ function App() {
 
       <ul>
         {shows ? shows.map(show =>
-          <li dangerouslySetInnerHTML={{__html: show.summary}}></li>
+          <li dangerouslySetInnerHTML={{ __html: show.summary }}></li>
         ) : "no shows"}
       </ul>
 
