@@ -9,10 +9,11 @@ const firebaseConfig = {
   messagingSenderId: "838443696855",
   appId: "1:838443696855:web:e66773730bd329c7006692"
 };
-firebase.initalizeApp(firebaseConfig);
 
-const pathref = path => firebase.database().ref(path);
+firebase.initializeApp(firebaseConfig);
+
 const dbref = firebase.database().ref();
+const pathref = path => firebase.database().ref(path);
 
 export default firebase;
 export { dbref, pathref };
