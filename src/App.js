@@ -1,28 +1,39 @@
+// css
 import './App.css';
+// hooks
+import { useState } from 'react';
+// 3rd party
 import axios from 'axios';
-import {useState, useEffect} from 'react';
+// data
+import tvShow from './data/tvShow';
 
 function App() {
 
-  const [data, setData] = useState([]);
+  const [shows, setShows] = useState([]);
 
-  useEffect(() => {
-    
+  const request = () => {
     axios({
-      url: 'https://api.unsplash.com/search/photos',
+      url: 'https://api.tvmaze.com/search/shows',
       params: {
-        client_id: 'DVkpqhjTJAEw1t_glS_nIrrxXdxoC32jbO6F3FoEtjA',
-        query: 'puppies',
-        per_page: 30
+        q: 'x',
       }
-    }).then( (res) => {
-      setData([]);
-    })
-
-  }, []);
+    }).then(({ data }) => setShows(data.map(
+      ({ show }) => new tvShow(show)
+    )));
+  }
 
   return (
-    <h1>nextBinge</h1>
+    <>
+      <h1>nextBinge</h1>
+      <button onClick={request}>request</button>
+
+      <ul>
+        {shows ? shows.map(show =>
+          <li dangerouslySetInnerHTML={{__html: show.summary}}></li>
+        ) : "no shows"}
+      </ul>
+
+    </>
   );
 }
 

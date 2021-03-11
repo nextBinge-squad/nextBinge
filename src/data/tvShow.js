@@ -3,22 +3,35 @@ class tvShow {
   id = {
     firebase: '',
     tvmaze: '',
-    network: ''
   }
 
   constructor({
     name,
     genres,
     network,
+    webChannel,
     image,
     summary,
   }) {
     this.name = name;
     this.genres = [...genres];
-    this.network = network.name;
-    this.image = image.medium;
-    this.summary = summary;
-    this.id.network = network.id;
+    this.summary = summary ?
+      summary :
+      `<b>${name}</b> is a show about stuff and things. 7/10.`;
+
+    if (image) {
+      this.image = image.medium;
+    }
+
+    if (network) {
+      this.network = network.name;
+      this.id.network = network.id;
+    }
+
+    if (webChannel) {
+      this.webChannel = webChannel.name;
+      this.id.webChannel = webChannel.id;
+    }
   }
 }
 
