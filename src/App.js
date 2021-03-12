@@ -9,6 +9,7 @@ import tvShow from './data/tvShow';
 // firebase
 import firebase from './firebase-config';
 import { dbref, pathref } from './firebase-config';
+import Swal from 'sweetalert2';
 
 const MAX_PAGES = 216;
 // 1. pick a random number between 1 and MAX_PAGES
@@ -35,7 +36,14 @@ function App() {
       }
     }).then(({ data }) => setShows(data.map(
       ({ show }) => new tvShow(show)
-    )));
+    ))).catch(error => {
+      return Swal.fire ({
+        title: 'Error!',
+        text: 'TV show data could not be loaded at this time, please try again later!',
+        icon: 'error',
+        timer: 2000
+      })
+    })
   }
 
   return (
