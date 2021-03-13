@@ -2,17 +2,20 @@
 import './App.css';
 // hooks
 import { useState, useEffect } from 'react';
-// 3rd party
-import axios from 'axios';
 // data
 import tvShow from './data/tvShow';
 // firebase
 import firebase from './firebase-config';
 import { dbref, pathref } from './firebase-config';
-// Search Form
+// components
+  // Search Form
 import UserSelectTv from './components/UserSelectTv';
-
-// Sweet Alert
+import RenderTvShow from './components/RenderTvShow';
+import UserList from './components/UserList';
+// 3rd party
+  // axios
+import axios from 'axios';
+  // Sweet Alert
 import Swal from 'sweetalert2';
 
 const MAX_PAGES = 216;

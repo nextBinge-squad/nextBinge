@@ -1,4 +1,3 @@
-import tvShow from "./data/tvShow";
 import RenderTvShow from "./RenderTvShow";
 
 // tvShows should be an array of tvShow objects
