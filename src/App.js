@@ -12,8 +12,12 @@ import { dbref, pathref } from './firebase-config';
 // Search Form
 import UserSelectTv from './UserSelectTv';
 
+// Display Tv Results from user input
+import DisplayTvResults from './DisplayTvResults';
+
 // Sweet Alert
 import Swal from 'sweetalert2';
+
 
 const MAX_PAGES = 216;
 // 1. pick a random number between 1 and MAX_PAGES
@@ -54,14 +58,20 @@ function App() {
     <>
       <UserSelectTv tvResults={request} />
       <h1>nextBinge</h1>
-      <button onClick={request}>request</button>
+      {/* <button onClick={request}>request</button> */}
+
+      {/* This is for DisplayTvResults component */}
+      <DisplayTvResults />
 
       <ul>
         {shows ? shows.map(show =>
           <li dangerouslySetInnerHTML={{ __html: show.summary }}></li>
         ) : "no shows"}
       </ul>
-
+      
+      <footer className="footer">
+          <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal, Lawrence Lee</p>
+      </footer>
     </>
   );
 }

@@ -35,7 +35,7 @@ const UserSelectTv = (props) => {
             />
 
             {/* Buttons could go here so that user can submit theri search query. Additional buttons could be added for randomize. */}
-            <button></button>
+            <button className="submit">Search</button>
             <button></button>
 
             {/* possible spot for drop down criteria such as network, review rating */}
