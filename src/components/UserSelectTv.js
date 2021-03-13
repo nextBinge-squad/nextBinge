@@ -80,7 +80,7 @@ const UserSelectTv = (props) => {
             const firstRandomShow = setRandomNumber(0, (filterAllRandomShows.length - 10));
             const lastRandomShow = firstRandomShow + 10;
 
-            // Using the variables set above now it is possible to slice the returned array at 2 random points everytime and return 10 TV Shows
+            // Using the variables set above now it is possible to slice the returned array at a random point (firstRandomShow) which would then extend until the next 10 tv shows (lastRandomShow)
             setRandomShows(filterAllRandomShows.slice(firstRandomShow, lastRandomShow));
 
 
