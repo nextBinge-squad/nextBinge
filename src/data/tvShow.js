@@ -3,7 +3,9 @@ class tvShow {
   id = {
     firebase: '',
     tvmaze: '',
-  }
+  };
+
+  priority = null;
 
   constructor({
     name,
