@@ -61,13 +61,15 @@ function App() {
       <h1>nextBinge</h1>
       <button onClick={request}>request</button>
 
-      <ul>
+      {/* <ul>
         {shows ? shows.map(show =>
           <li>
             <RenderTvShow tvShow={show} />
           </li>
         ) : "no shows"}
-      </ul>
+      </ul> */}
+
+      <UserList tvShows={shows} />
 
     </>
   );
