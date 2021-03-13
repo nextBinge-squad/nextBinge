@@ -1,4 +1,5 @@
 import tvShow from "./data/tvShow";
+import RenderTvShow from "./RenderTvShow";
 
 // tvShows should be an array of tvShow objects
 function UserList({ tvShows }) {
@@ -12,7 +13,7 @@ function UserList({ tvShows }) {
         .sort(compareShows)
         .map(tvShow =>
           <li className="tvShow" key={tvShow.id.firebase}>
-
+            <RenderTvShow tvShow={tvShow} />
           </li>)}
     </ul>
   );
