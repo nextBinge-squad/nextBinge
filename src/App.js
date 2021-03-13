@@ -2,17 +2,20 @@
 import './App.css';
 // hooks
 import { useState, useEffect } from 'react';
-// 3rd party
-import axios from 'axios';
 // data
 import tvShow from './data/tvShow';
 // firebase
 import firebase from './firebase-config';
 import { dbref, pathref } from './firebase-config';
-// Search Form
+// components
+  // Search Form
 import UserSelectTv from './components/UserSelectTv';
-
-// Sweet Alert
+import RenderTvShow from './components/RenderTvShow';
+import UserList from './components/UserList';
+// 3rd party
+  // axios
+import axios from 'axios';
+  // Sweet Alert
 import Swal from 'sweetalert2';
 
 const MAX_PAGES = 216;
@@ -38,10 +41,12 @@ function App() {
       params: {
         q: userSearch,
       }
-    }).then(({ data }) => setShows(data.map(
-      ({ show }) => new tvShow(show)
-    ))).catch(error => {
-      return Swal.fire ({
+    }).then(({ data }) => {
+      setShows(data.map(
+        ({ show }) => new tvShow(show)
+      ));
+    }).catch(error => {
+      return Swal.fire({
         title: 'Error!',
         text: 'TV show data could not be loaded at this time, please try again later!',
         icon: 'error',
@@ -56,11 +61,15 @@ function App() {
       <h1>nextBinge</h1>
       <button onClick={request}>request</button>
 
-      <ul>
+      {/* <ul>
         {shows ? shows.map(show =>
-          <li dangerouslySetInnerHTML={{ __html: show.summary }}></li>
+          <li>
+            <RenderTvShow tvShow={show} />
+          </li>
         ) : "no shows"}
-      </ul>
+      </ul> */}
+
+      <UserList tvShows={shows} />
 
     </>
   );
