@@ -5,7 +5,7 @@ class tvShow {
     tvmaze: '',
   };
 
-  priority = null;
+  priority = 0;
 
   constructor({
     name,
