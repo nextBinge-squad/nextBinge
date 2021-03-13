@@ -10,9 +10,7 @@ import tvShow from './data/tvShow';
 import firebase from './firebase-config';
 import { dbref, pathref } from './firebase-config';
 // Search Form
-import UserSelectTv from './UserSelectTv';
-// TV Show Component
-import RenderTvShow from './RenderTvShow';
+import UserSelectTv from './components/UserSelectTv';
 
 // Sweet Alert
 import Swal from 'sweetalert2';
