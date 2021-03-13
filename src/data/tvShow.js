@@ -12,12 +12,14 @@ class tvShow {
     webChannel,
     image,
     summary,
+    language,
   }) {
     this.name = name;
     this.genres = [...genres];
     this.summary = summary ?
       summary :
       `<b>${name}</b> is a show about stuff and things. 7/10.`;
+    this.language = language;
 
     if (image) {
       this.image = image.medium;
