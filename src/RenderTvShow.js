@@ -1,5 +1,9 @@
 function RenderTvShow({ tvShow }) {
   return (
-    { __html: show.summary }
+    <div className="tvShow" dangerouslySetInnerHTML={{ __html: tvShow.summary }}>
+
+    </div>
   )
 }
+
+export default RenderTvShow;

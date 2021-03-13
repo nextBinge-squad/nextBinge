@@ -11,6 +11,8 @@ import firebase from './firebase-config';
 import { dbref, pathref } from './firebase-config';
 // Search Form
 import UserSelectTv from './UserSelectTv';
+// TV Show Component
+import RenderTvShow from './RenderTvShow';
 
 // Sweet Alert
 import Swal from 'sweetalert2';
@@ -38,10 +40,12 @@ function App() {
       params: {
         q: userSearch,
       }
-    }).then(({ data }) => setShows(data.map(
-      ({ show }) => new tvShow(show)
-    ))).catch(error => {
-      return Swal.fire ({
+    }).then(({ data }) => {
+      setShows(data.map(
+        ({ show }) => new tvShow(show)
+      ));
+    }).catch(error => {
+      return Swal.fire({
         title: 'Error!',
         text: 'TV show data could not be loaded at this time, please try again later!',
         icon: 'error',
@@ -58,7 +62,9 @@ function App() {
 
       <ul>
         {shows ? shows.map(show =>
-          <li dangerouslySetInnerHTML={{ __html: show.summary }}></li>
+          <li>
+            <RenderTvShow tvShow={show} />
+          </li>
         ) : "no shows"}
       </ul>
 
