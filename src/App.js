@@ -9,6 +9,10 @@ import tvShow from './data/tvShow';
 // firebase
 import firebase from './firebase-config';
 import { dbref, pathref } from './firebase-config';
+// Search Form
+import UserSelectTv from './UserSelectTv';
+
+// Sweet Alert
 import Swal from 'sweetalert2';
 
 const MAX_PAGES = 216;
