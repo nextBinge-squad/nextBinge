@@ -32,6 +32,7 @@ const UserSelectTv = (props) => {
             <input type="text" className="searchField" placeholder="Enter your TV show"
             onChange={ (event) => setTextInput(event.target.value)}
             value={textInput}
+            required
             />
 
             {/* Buttons could go here so that user can submit theri search query. Additional buttons could be added for randomize. */}
