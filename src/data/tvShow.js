@@ -5,7 +5,8 @@ class tvShow {
     tvmaze: '',
   };
 
-  priority = 0;
+  // priority = 0;
+  priority = Math.random();
 
   constructor({
     name,
