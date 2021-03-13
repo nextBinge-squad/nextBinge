@@ -54,6 +54,8 @@ function App() {
     })
   }
 
+  
+
   return (
     <>
       <UserSelectTv tvResults={request} />
@@ -61,13 +63,14 @@ function App() {
       {/* <button onClick={request}>request</button> */}
 
       {/* This is for DisplayTvResults component */}
-      <DisplayTvResults />
+      {/* <DisplayTvResults /> */}
 
       <ul>
         {shows ? shows.map(show =>
           <li dangerouslySetInnerHTML={{ __html: show.summary }}></li>
         ) : "no shows"}
       </ul>
+
       
       <footer className="footer">
           <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal, Lawrence Lee</p>

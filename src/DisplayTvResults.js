@@ -5,7 +5,7 @@
 import { useState } from 'react';
 
 
-const DisplayTvResults = () => {
+const DisplayTvResults = (props) => {
     return (
         <>
         {/* TV show results from user input, randomize should go here:
