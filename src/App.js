@@ -59,7 +59,7 @@ function App() {
     <>
       <UserSelectTv tvResults={request} />
       <h1>nextBinge</h1>
-      <button onClick={request}>request</button>
+      {/* <button onClick={request}>request</button> */}
 
       {/* <ul>
         {shows ? shows.map(show =>
