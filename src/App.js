@@ -32,11 +32,11 @@ function App() {
     })
   }, []);
 
-  const request = () => {
+  const request = (userSearch) => {
     axios({
       url: 'https://api.tvmaze.com/search/shows',
       params: {
-        q: 'x',
+        q: userSearch,
       }
     }).then(({ data }) => setShows(data.map(
       ({ show }) => new tvShow(show)
@@ -52,6 +52,7 @@ function App() {
 
   return (
     <>
+      <UserSelectTv tvResults={request} />
       <h1>nextBinge</h1>
       <button onClick={request}>request</button>
 
