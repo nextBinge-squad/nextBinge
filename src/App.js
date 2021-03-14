@@ -11,6 +11,7 @@ import { dbref, pathref } from './firebase-config';
   // Search Form
 import UserSelectTv from './components/UserSelectTv';
 import TVCardSmall from './components/TVCardSmall';
+import TVCardBig from './components/TVCardBig';
 import BingeList from './components/BingeList';
 // 3rd party
   // axios

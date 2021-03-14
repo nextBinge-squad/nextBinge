@@ -95,7 +95,7 @@ const UserSelectTv = (props) => {
                     required
                 />
 
-                {/* Buttons could go here so that user can submit theri search query. Additional buttons could be added for randomize. */}
+                {/* Buttons could go here so that user can submit their search query. Additional buttons could be added for randomize. */}
                 {/* Search query button */}
                 <button className="submit">&#x1F50E;</button>
                 
