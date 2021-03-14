@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-function TVCard({ tvShow }) {
+function TVCardSmall({ tvShow }) {
   return (
     <>
       {/* displays tv show summary */}
@@ -15,4 +15,4 @@ function TVCard({ tvShow }) {
   )
 }
 
-export default TVCard;
+export default TVCardSmall;

@@ -1,7 +1,7 @@
-import TVCard from "./TVCard";
+import TVCardSmall from "./TVCardSmall";
 
 // tvShows should be an array of tvShow objects
-function UserList({ tvShows }) {
+function BingeList({ tvShows }) {
 
   // defines a sorting criterion: sort based on tv shows' "priority" property
   const compareShows = (tvShow1, tvShow2) =>
@@ -15,10 +15,10 @@ function UserList({ tvShows }) {
         // render each tv show using RenderTvShow component
         .map(tvShow =>
           <li className="tvShow" key={tvShow.id.firebase}>
-            <TVCard tvShow={tvShow} />
+            <TVCardSmall tvShow={tvShow} />
           </li>)}
     </ul>
   );
 }
 
-export default UserList;
+export default BingeList;

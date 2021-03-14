@@ -10,8 +10,8 @@ import { dbref, pathref } from './firebase-config';
 // components
   // Search Form
 import UserSelectTv from './components/UserSelectTv';
-import TVCard from './components/TVCard';
-import UserList from './components/UserList';
+import TVCardSmall from './components/TVCardSmall';
+import BingeList from './components/BingeList';
 // 3rd party
   // axios
 import axios from 'axios';
@@ -69,7 +69,7 @@ function App() {
         ) : "no shows"}
       </ul> */}
 
-      <UserList tvShows={shows} />
+      <BingeList tvShows={shows} />
 
       <footer>
         <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal & Lawrence Lee</p>
