@@ -1,8 +1,6 @@
 // Component for detailed TV show information for the user. After search results this will be available after the user hovers over title and will be provided with this data on the right side of the modal.
 // Information available is the following: Name of TV series, genres, image, language, priority, summary, webChannel
 
-import { Fragment } from "react";
-
 
 function TVCardBig({ tvShow }) {
   // const getGenres = (genres) => {
@@ -24,11 +22,7 @@ function TVCardBig({ tvShow }) {
 
       <p>Genres: Science-fiction, Drama, Crime</p>
 
-      <p>Rating: 8.2</p>
-
       <p>Network: Showcase</p>
-      <p>Premiered: May 27th, 2012</p>
-      <p>Status: Ended</p>
 
       <p>Country: Canada</p>
 
