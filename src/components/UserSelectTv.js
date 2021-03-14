@@ -97,10 +97,9 @@ const UserSelectTv = (props) => {
 
                 {/* Buttons could go here so that user can submit theri search query. Additional buttons could be added for randomize. */}
                 {/* Search query button */}
-                <button className="submit">Search</button>
+                <button className="submit">&#x1F50E;</button>
                 
                 <button onClick={getRandomTvShows}>Randomize!</button>
-                <button></button>
 
                 {/* possible spot for drop down criteria such as network, review rating */}
             </form>

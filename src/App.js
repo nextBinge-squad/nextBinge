@@ -57,8 +57,8 @@ function App() {
 
   return (
     <>
-      <UserSelectTv tvResults={request} />
       <h1>nextBinge</h1>
+      <UserSelectTv tvResults={request} />
       {/* <button onClick={request}>request</button> */}
 
       {/* <ul>
