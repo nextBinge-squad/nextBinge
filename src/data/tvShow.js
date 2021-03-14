@@ -20,8 +20,8 @@ class tvShow {
     this.name = name;
     this.genres = [...genres];
     this.summary = summary ?
-      summary :
-      `<b>${name}</b> is a show about stuff and things. 7/10.`;
+      summary.slice(3,-4) :
+      `A show about stuff and things. 7/10.`;
     this.language = language;
 
     if (image) {
