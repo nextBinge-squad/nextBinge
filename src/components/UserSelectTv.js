@@ -20,6 +20,9 @@ const UserSelectTv = (props) => {
     //Initialize for saving an array of random tv show that is set from the getRandomTvShows function.
     const [randomShows, setRandomShows] = useState([]);
 
+    //Initialize for updating user's Genre selection
+    const [selectedGenre, setSelectedGenre] = useState('All');
+
     // Initialize for saving text input from the user. Set as an empty string to start.
     const [textInput, setTextInput] = useState('');
 
@@ -46,7 +49,7 @@ const UserSelectTv = (props) => {
 
     // Function called when button is clicked to return an array of 10 random TV Shows
     const getRandomTvShows = () => {
-
+        
         // Get a random number between 0 and 216 (the max number of pages when calling the API as per the documentation)
         const randomPage = getRandomNumber(MAX_PAGES);
 
@@ -65,12 +68,24 @@ const UserSelectTv = (props) => {
                 return show.language === "English";
             });
 
+            // If the Genre is not All then apply a filter to store the TV Shows from the desired genres
+            if (selectedGenre !== 'All') {
+                const genresEnglishShows = randomEnglishShows.filter((show) => {
+    
+                    return show.genres.includes(`${selectedGenre}`);
+                });
+
+                setRandomShows(genresEnglishShows);
+            }
+            else {
             // getRandomShow calls the getRandomNumber variable to get a random number from the range of 0 and the returned array length. 
             // Since we are returning 10 shows from the array, the length should be decreased by 10 as to not exceed the array length.
             const getRandomShow = getRandomNumber( (randomEnglishShows.length - 10));            
 
             // Using the variables set above now it is possible to slice the returned array at a random point (getRandomShow) which would then extend until the next 10 tv shows
             setRandomShows(randomEnglishShows.slice(getRandomShow, getRandomShow + 10));
+            }
+
 
 
         }).catch(error => {
@@ -82,6 +97,13 @@ const UserSelectTv = (props) => {
             })
         })
     }     
+
+    // Used to update the value of the select element when 
+    const handleChange = (e) => {
+        
+        setSelectedGenre(e.target.value);
+        
+        }
 
     return (
         <>
@@ -97,16 +119,30 @@ const UserSelectTv = (props) => {
 
                 {/* Buttons could go here so that user can submit theri search query. Additional buttons could be added for randomize. */}
                 {/* Search query button */}
-                <button className="submit">&#x1F50E;</button>
+                
+                <button className="submit">Search</button>
+
+                <select 
+                value={selectedGenre} 
+                onChange={handleChange}>
+                    <option value="All">All</option>
+                    <option value="Comedy"> Comedy </option>
+                    <option value="Adventure"> Adventure </option>
+                    <option value="Action"> Action </option>
+                </select>
                 
                 <button onClick={getRandomTvShows}>Randomize!</button>
+                <button></button>
 
                 {/* possible spot for drop down criteria such as network, review rating */}
             </form>
 
             <ul>
                 {randomShows ? randomShows.map(show =>
+                <>
                     <li dangerouslySetInnerHTML={{ __html: show.summary }}></li>
+                    <li dangerouslySetInnerHTML={{ __html: show.genres }}></li>
+                </>
                 ) : "no shows"}
             </ul>
         </>
