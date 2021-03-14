@@ -10,7 +10,7 @@ import { dbref, pathref } from './firebase-config';
 // components
   // Search Form
 import UserSelectTv from './components/UserSelectTv';
-import RenderTvShow from './components/RenderTvShow';
+import TVCard from './components/TVCard';
 import UserList from './components/UserList';
 // 3rd party
   // axios

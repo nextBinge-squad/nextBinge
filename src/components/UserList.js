@@ -1,4 +1,4 @@
-import RenderTvShow from "./RenderTvShow";
+import TVCard from "./TVCard";
 
 // tvShows should be an array of tvShow objects
 function UserList({ tvShows }) {
@@ -15,7 +15,7 @@ function UserList({ tvShows }) {
         // render each tv show using RenderTvShow component
         .map(tvShow =>
           <li className="tvShow" key={tvShow.id.firebase}>
-            <RenderTvShow tvShow={tvShow} />
+            <TVCard tvShow={tvShow} />
           </li>)}
     </ul>
   );
