@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import axios from 'axios';
-import tvShow from './data/tvShow';
+import tvShow from '../data/tvShow';
 import Swal from 'sweetalert2';
 
 const MAX_PAGES = 216;
@@ -37,9 +37,9 @@ const UserSelectTv = (props) => {
     }
 
     // Function created to get random integer between AND including the selected range
-    const setRandomNumber = (firstNumber, lastNumber) => {
+    const getRandomNumber = (maxNumber) => {
 
-        const randomNumber = Math.floor(Math.random() * (lastNumber - firstNumber + 1) + firstNumber);
+        const randomNumber = Math.floor(Math.random() * (maxNumber+1));
 
         return randomNumber;
     }
@@ -48,7 +48,7 @@ const UserSelectTv = (props) => {
     const getRandomTvShows = () => {
 
         // Get a random number between 0 and 216 (the max number of pages when calling the API as per the documentation)
-        const randomPage = setRandomNumber(0, MAX_PAGES);
+        const randomPage = getRandomNumber(MAX_PAGES);
 
         axios({
             url: 'http://api.tvmaze.com/shows',
@@ -58,30 +58,19 @@ const UserSelectTv = (props) => {
             }
         }).then(({ data }) => {
 
-            const allRandomShows = data.map((show) => {
+            const allRandomShows = data.map((show) => new tvShow(show))
 
-                // Check if the language of the show is in the desired language
-                if (show.language === "English") {
-
-                    //if the show is in English the set send the data to the tvShow constructor
-                    return new tvShow(show)
-                }
-                //else do nothing
-                else { }
-            })
-
-            // Filter out from the array returned the undefined values so that we can just keep the shows in English
-            const filterAllRandomShows = allRandomShows.filter((show) => {
-                return show !== undefined;
+            // Filter out from the array returned the shows in English
+            const randomEnglishShows = allRandomShows.filter((show) => {
+                return show.language === "English";
             });
 
-            // firstRandomShow and lastRandomShow calls the setRandomNumber variable to get a random number from the range of 0 and the returned array length. 
+            // getRandomShow calls the getRandomNumber variable to get a random number from the range of 0 and the returned array length. 
             // Since we are returning 10 shows from the array, the length should be decreased by 10 as to not exceed the array length.
-            const firstRandomShow = setRandomNumber(0, (filterAllRandomShows.length - 10));
-            const lastRandomShow = firstRandomShow + 10;
+            const getRandomShow = getRandomNumber( (randomEnglishShows.length - 10));            
 
-            // Using the variables set above now it is possible to slice the returned array at a random point (firstRandomShow) which would then extend until the next 10 tv shows (lastRandomShow)
-            setRandomShows(filterAllRandomShows.slice(firstRandomShow, lastRandomShow));
+            // Using the variables set above now it is possible to slice the returned array at a random point (getRandomShow) which would then extend until the next 10 tv shows
+            setRandomShows(randomEnglishShows.slice(getRandomShow, getRandomShow + 10));
 
 
         }).catch(error => {
@@ -92,7 +81,7 @@ const UserSelectTv = (props) => {
                 timer: 2000
             })
         })
-    }
+    }     
 
     return (
         <>
