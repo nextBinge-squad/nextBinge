@@ -20,6 +20,7 @@ class tvShow {
     this.name = name;
     this.genres = [...genres];
     this.summary = summary ?
+      // removes enclosing <p> </p> tags that all this API's summaries seem to have.
       summary.slice(3,-4) :
       `A show about stuff and things. 7/10.`;
     this.language = language;
