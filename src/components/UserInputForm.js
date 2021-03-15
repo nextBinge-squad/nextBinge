@@ -20,6 +20,8 @@ function UserInputForm({ setShowResults }) {
     'Comedy',
     'Adventure',
     'Action',
+    'Thriller',
+    'Sci-Fi',
   ];
 
   // Total number of pages available at TVmaze API "shows" endpoint.
@@ -136,7 +138,7 @@ function UserInputForm({ setShowResults }) {
           ))
           .slice(randIndex, randIndex + showAmount)
       );
-    });
+    }).catch((error) => Swal.fire(tvAlert));
   };
 
   return (
