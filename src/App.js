@@ -70,7 +70,23 @@ function App() {
         ) : "no shows"}
       </ul> */}
 
+      <button onClick={() => {
+        const showList = new tvShowList('test', shows);
+
+        showList.id = pathref('lists').push(showList).key;
+      }}>push</button>
+
       <BingeList tvShows={shows} />
+
+      <button onClick={console.log(lists)}>show lists</button>
+
+      <button onClick={() => {
+          const updates = {
+            'lists': lists
+          }
+          pathref('lists').update('-MVrWANxlJS8nisyYFML');
+        }
+      }>add a show</button>
 
       <footer>
         <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal & Lawrence Lee</p>
