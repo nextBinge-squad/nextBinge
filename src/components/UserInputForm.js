@@ -10,8 +10,20 @@ function UserInputForm({ setShowResults }) {
 
   const [textInput, setTextInput] = useState('');
 
-  // Highest page number available at TVmaze API "shows" endpoint.
-  const MAX_PAGES = 216;
+  const [filters, setFilters] = useState({
+    language: 'English',
+    genre: 'Any',
+  });
+
+  const genreOptions = [
+    'Any',
+    'Comedy',
+    'Adventure',
+    'Action',
+  ];
+
+  // Total number of pages available at TVmaze API "shows" endpoint.
+  const TOTAL_PAGES = 217;
 
   // Alert in case an API call goes wrong. Uses Sweet Alert 2.
   const tvAlert = {
@@ -23,7 +35,7 @@ function UserInputForm({ setShowResults }) {
 
   // Returns a random integer less than or equal to maxNumber.
   const getRandomNumber = (maxNumber) =>
-    Math.floor(Math.random() * (maxNumber + 1));
+    Math.floor(Math.random() * (maxNumber));
 
   // Makes a GET request to TVmaze's 'search/shows' endpoint.
   // Saves results to showResults in App.js.
@@ -42,27 +54,89 @@ function UserInputForm({ setShowResults }) {
 
   // Makes a GET request to TVmaze's 'shows' endpoint.
   // Saves results to showResults in App.js.
-  const randomShows = (pageNum) => {
+  const randomShows = () => {
 
     // amount of shows to display
     const showAmount = 10;
 
-    axios({
-      url: 'https://api.tvmaze.com/shows',
-      params: {
-        page: pageNum,
-      },
-    }).then(({ data }) => {
+    // for each additional filter, request an additional page from API
+    // counteracts data "thinning" due to filtering
+    let additionalPages = 0;
 
-      const engShows = data.filter((show) => show.language === "English");
-      const randIndex = getRandomNumber(engShows.length - showAmount);
+    for (let key in filters) {
+      if (filters[key] !== 'Any') {
+        additionalPages++;
+      }
+    }
+
+    // start at a random page
+    // if there are additional pages, don't pick a starting page too close to the end
+    const startPage = getRandomNumber(TOTAL_PAGES - additionalPages);
+
+    // for (let page = 0; page <= additionalPages; page++) {
+    //   axios({
+    //     url: 'https://api.tvmaze.com/shows',
+    //     params: {
+    //       page: startPage + page,
+    //     },
+    //   }).then(({ data }) => {
+
+    //     data
+    //       .filter((show) => (
+    //         show.language === filters.language &&
+    //         (
+    //           filters.genre === 'Any' ||
+    //           show.genres.includes(filters.genre)
+    //         )
+    //       ))
+    //       .forEach((show) => showData.push(show));
+
+    //   }).catch((error) => Swal.fire(tvAlert));
+    // }
+
+    
+
+    // console.log(showData);
+    // console.log(showData.length);
+
+    const promises = [];
+    let showData = [];
+
+    for (let page = 0; page <= additionalPages; page++) {
+      promises.push(axios({
+        url: 'https://api.tvmaze.com/shows',
+        params: {
+          page: startPage + page,
+        }
+      }))
+    }
+
+    Promise.all(promises).then((pages) => {
+
+      pages.forEach(({ data }) => {
+        showData = showData.concat(data);
+      });
+
+      const randIndex = getRandomNumber(showData.length - showAmount);
 
       setShowResults(
-        engShows
+        showData
+          .map(show => new tvShow(show))
+          .filter(show => (
+            // Filters
+
+            // language
+            show.language === filters.language &&
+
+            // genre
+            (
+              filters.genre === 'Any' ||
+              show.genres.includes(filters.genre)
+            )
+          ))
           .slice(randIndex, randIndex + showAmount)
-          .map((show) => new tvShow(show))
       );
-    }).catch((error) => Swal.fire(tvAlert));
+    });
   };
 
   return (
@@ -107,10 +181,23 @@ function UserInputForm({ setShowResults }) {
         className="random"
         onSubmit={(event) => {
           event.preventDefault();
-          randomShows(getRandomNumber(MAX_PAGES));
+          randomShows();
         }}
       >
         {/* possible spot for drop down criteria such as network, review rating */}
+
+        <label htmlFor="genre">Select a Genre (Optional): </label>
+        <select
+          id="genre"
+          value={filters.genre}
+          onChange={(event) =>
+            setFilters({ ...filters, genre: event.target.value })
+          }
+        >
+          {genreOptions.map(genre => (
+            <option value={genre}>{genre}</option>
+          ))}
+        </select>
 
         <label htmlFor="randomize" className="sr-only">
           Press for random TV shows:

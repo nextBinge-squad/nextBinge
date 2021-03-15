@@ -40,7 +40,10 @@ function App() {
       <h1>nextBinge</h1>
       <UserInputForm setShowResults={setShowResults} />
 
-      <BingeList tvShows={showResults} />
+      { showResults ? 
+        <BingeList tvShows={showResults} /> :
+        <h3>Working...</h3>
+      }
 
       <footer>
         <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal & Lawrence Lee</p>
