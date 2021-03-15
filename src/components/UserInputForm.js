@@ -51,7 +51,9 @@ function UserInputForm({ setShowResults }) {
       setShowResults(data.map(
         ({ show }) => new tvShow(show)
       ))
-    ).catch((error) => Swal.fire(tvAlert));
+    ).catch((error) => {
+      Swal.fire(tvAlert);
+    });
   };
 
   // Makes a GET request to TVmaze's 'shows' endpoint.
@@ -112,7 +114,9 @@ function UserInputForm({ setShowResults }) {
           ))
           .slice(randIndex, randIndex + showAmount)
       );
-    }).catch((error) => Swal.fire(tvAlert));
+    }).catch((error) => {
+      Swal.fire(tvAlert);
+    });
   };
 
   return (

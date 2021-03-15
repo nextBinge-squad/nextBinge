@@ -1,6 +1,9 @@
 class tvShow {
 
-  id = '';
+  id = {
+    network: '',
+    webChannel: '',
+  };
 
   upvotes = 0;
 
