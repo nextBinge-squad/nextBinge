@@ -8,15 +8,16 @@ import tvShow from './data/tvShow';
 import firebase from './firebase-config';
 import { dbref, pathref } from './firebase-config';
 // components
-  // Search Form
+// Search Form
 import UserSelectTv from './components/UserSelectTv';
 import TVCardSmall from './components/TVCardSmall';
 import TVCardBig from './components/TVCardBig';
 import BingeList from './components/BingeList';
+import { A, B, C, D, E, F } from './components/ReducerTest';
 // 3rd party
-  // axios
+// axios
 import axios from 'axios';
-  // Sweet Alert
+// Sweet Alert
 import Swal from 'sweetalert2';
 
 const MAX_PAGES = 216;
@@ -27,57 +28,10 @@ const MAX_PAGES = 216;
 // 3b. sort if necessary (alphabetical default, etc)
 
 function App() {
-
-  const [shows, setShows] = useState([]);
-
-  useEffect(() => {
-    dbref.on('value', data => {
-      console.log(data.val());
-    })
-  }, []);
-
-  const request = (userSearch) => {
-    axios({
-      url: 'https://api.tvmaze.com/search/shows',
-      params: {
-        q: userSearch,
-      }
-    }).then(({ data }) => {
-      setShows(data.map(
-        ({ show }) => new tvShow(show)
-      ));
-    }).catch(error => {
-      return Swal.fire({
-        title: 'Error!',
-        text: 'TV show data could not be loaded at this time, please try again later!',
-        icon: 'error',
-        timer: 2000
-      })
-    })
-  }
-
-  return (
-    <>
-      <h1>nextBinge</h1>
-      <UserSelectTv tvResults={request} />
-      {/* <button onClick={request}>request</button> */}
-
-      {/* <ul>
-        {shows ? shows.map(show =>
-          <li>
-            <RenderTvShow tvShow={show} />
-          </li>
-        ) : "no shows"}
-      </ul> */}
-
-      <BingeList tvShows={shows} />
-
-      <footer>
-        <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal & Lawrence Lee</p>
-      </footer>
-
-    </>
-  );
+  return (<>
+    <h1>useState vs useReducer</h1>
+    <E />
+  </>)
 }
 
 export default App;
