@@ -75,32 +75,6 @@ function UserInputForm({ setShowResults }) {
     // if there are additional pages, don't pick a starting page too close to the end
     const startPage = getRandomNumber(TOTAL_PAGES - additionalPages);
 
-    // for (let page = 0; page <= additionalPages; page++) {
-    //   axios({
-    //     url: 'https://api.tvmaze.com/shows',
-    //     params: {
-    //       page: startPage + page,
-    //     },
-    //   }).then(({ data }) => {
-
-    //     data
-    //       .filter((show) => (
-    //         show.language === filters.language &&
-    //         (
-    //           filters.genre === 'Any' ||
-    //           show.genres.includes(filters.genre)
-    //         )
-    //       ))
-    //       .forEach((show) => showData.push(show));
-
-    //   }).catch((error) => Swal.fire(tvAlert));
-    // }
-
-    
-
-    // console.log(showData);
-    // console.log(showData.length);
-
     const promises = [];
     let showData = [];
 
