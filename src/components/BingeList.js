@@ -1,7 +1,7 @@
 import TVCardSmall from "./TVCardSmall";
 
 // tvShows should be an array of tvShow objects
-function BingeListCard({ tvShows }) {
+function BingeList({ tvShows }) {
 
   // defines a sorting criterion: sort based on tv shows' "priority" property
   const compareShows = (tvShow1, tvShow2) =>
@@ -21,4 +21,4 @@ function BingeListCard({ tvShows }) {
   );
 }
 
-export default BingeListCard;
+export default BingeList;

@@ -1,13 +1,13 @@
-class tvShowList extends Array {
-
+class tvShowList {
   /**
-   * creates a list of tv shows,
-   * which is an array with a few extra properties
-   * @param {string} name the name of this tv show list
-   * @param  {...any} args any number of tvShow objects
+   * basically an array with a name attached
+   * @param {string} name this tv show list's name
+   * @param {array} tvShows an array of tvShow objects
    */
-  constructor(name, ...args) {
-    super(...args);
+  constructor(name, tvShows) {
     this.name = name;
+    this.shows = tvShows;
   }
 }
+
+export default tvShowList;

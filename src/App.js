@@ -2,21 +2,19 @@
 import './App.css';
 // hooks
 import { useState, useEffect } from 'react';
-// data
-import tvShow from './data/tvShow';
-// firebase
-import firebase from './firebase-config';
-import { dbref, pathref } from './firebase-config';
 // components
-  // Search Form
 import UserSelectTv from './components/UserSelectTv';
 import TVCardSmall from './components/TVCardSmall';
 import TVCardBig from './components/TVCardBig';
 import BingeList from './components/BingeList';
+// data
+import tvShow from './data/tvShow';
+import tvShowList from './data/tvShowList';
+// firebase
+import firebase from './firebase-config';
+import { dbref, pathref } from './firebase-config';
 // 3rd party
-  // axios
 import axios from 'axios';
-  // Sweet Alert
 import Swal from 'sweetalert2';
 
 const MAX_PAGES = 216;
@@ -28,11 +26,13 @@ const MAX_PAGES = 216;
 
 function App() {
 
+  const [lists, setLists] = useState({});
+
   const [shows, setShows] = useState([]);
 
   useEffect(() => {
-    dbref.on('value', data => {
-      console.log(data.val());
+    pathref('lists').on('value', data => {
+      setLists(data.val());
     })
   }, []);
 
