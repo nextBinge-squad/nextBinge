@@ -42,10 +42,12 @@ function A() {
 // useState combined into one state
 function B() {
 
-  const [formState, setFormState] = useState({
+  const initState = {
     color: 'black',
     pet: 'cat',
-  });
+  };
+
+  const [formState, setFormState] = useState(initState);
 
   return (<>
 
@@ -84,14 +86,8 @@ function B() {
 // useReducer
 function C() {
 
-  const reducer = (state, action) => {
-    const { type, value } = action;
-    if (type === 'color') {
-      return { ...state, color: value };
-    }
-    if (type === 'pet') {
-      return { ...state, pet: value };
-    }
+  const reducer = (state, { type, value }) => {
+    return { ...state, [type]: value };
   };
 
   const initState = {
@@ -143,10 +139,9 @@ function D() {
     pet: 'cat',
   };
 
-  const [formState, setFormState] = useReducer(
-    (state, { type, value }) => ({ ...state, [type]: value }),
-    initState
-  );
+  const reducer = (state, { type, value }) => ({ ...state, [type]: value });
+
+  const [formState, setFormState] = useReducer(reducer, initState);
 
   return (<>
 
@@ -186,6 +181,7 @@ function D() {
 function E() {
 
   const form = {
+
     color: [
       'black',
       'pink',
@@ -200,10 +196,37 @@ function E() {
 
   const formFields = Object.keys(form); // ['color', 'pet']
 
-  const initState = {
-    color: 'black',
-    pet: 'cat',
+  // const initState = {
+  //   color: 'black',
+  //   pet: 'cat',
+  // };
+
+  const initState = {};
+  for (let field in form) {
+    initState[field] = form[field][0];
   }
+
+  const generateDropdown = (field) => {
+
+    return (<>
+
+      <label htmlFor={field}>Choose a {field}</label>
+
+      <select
+        id={field}
+        value={formState[field]}
+        onChange={event => setFormState({
+          ...formState,
+          [field]: event.target.value,
+        })}
+      >
+        {form[field].map(choice => (
+          <option value={choice}>{choice}</option>
+        ))}
+      </select>
+    </>)
+
+  };
 
   const [formState, setFormState] = useState(initState);
 
@@ -213,31 +236,7 @@ function E() {
 
     <p>You have a {formState.color} {formState.pet}.</p>
 
-    <select
-      id="color"
-      value={formState.color}
-      onChange={event => setFormState({
-        ...formState,
-        color: event.target.value,
-      })}
-    >
-      <option value="black">black</option>
-      <option value="pink">pink</option>
-      <option value="blue">blue</option>
-    </select>
-
-    <select
-      id="pet"
-      value={formState.pet}
-      onChange={event => setFormState({
-        ...formState,
-        pet: event.target.value,
-      })}
-    >
-      <option value="cat">cat</option>
-      <option value="dog">dog</option>
-      <option value="mouse">mouse</option>
-    </select>
+    {formFields.map(field => generateDropdown(field))}
   </>);
 }
 
