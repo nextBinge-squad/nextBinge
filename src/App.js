@@ -51,7 +51,7 @@ function App() {
         }
 
         {/* <Route path="/" exact component={TVCardSmall}/> */}
-        <Route path="/tvShow/:tvID" exact component={TVCardBig} />
+        <Route path="/TVCardBig" exact component={TVCardBig} />
 
         <footer>
           <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal & Lawrence Lee</p>

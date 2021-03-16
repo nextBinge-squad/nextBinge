@@ -1,8 +1,9 @@
 
 import TVCardBig from './TVCardBig';
+import { Link } from 'react-router-dom';
 
 function TVCardSmall({ tvShow }) {
-  console.log(tvShow);
+  // console.log(tvShow);
 
   return (
     <>
@@ -16,9 +17,11 @@ function TVCardSmall({ tvShow }) {
         )}</p>
       </div>
 
-      <image>
-        <img src={tvShow.image} alt="poster of tv series..." />
-      </image>
+      <Link to={'/TVCardBig'}>
+        <image>
+          <img src={tvShow.image} alt="poster of tv series..." />
+        </image>
+      </Link>
 
 
       {/* displays tv show priority */}
