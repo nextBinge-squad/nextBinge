@@ -3,7 +3,6 @@ import TVCardBig from './TVCardBig';
 import { Link } from 'react-router-dom';
 
 function TVCardSmall({ tvShow }) {
-  console.log(tvShow);
 
   return (
     <>

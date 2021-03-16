@@ -5,11 +5,12 @@ import { useState } from 'react';
 import axios from 'axios';
 import tvShow from '../data/tvShow';
 import Swal from 'sweetalert2';
-import TVCardSmall from '../components/TVCardSmall';
+import BingeList from './BingeList';
 
-function UserInputForm() {
+function UserInput() {
 
   const [showResults, setShowResults] = useState([]);
+
   const [textInput, setTextInput] = useState('');
 
   const [filters, setFilters] = useState({
@@ -64,11 +65,10 @@ function UserInputForm() {
 
 
     const randomPage = getRandomNumber(TOTAL_PAGES);
-    
+
 
     let additionalPages = 0;
-    console.log(filters);
-    
+
     for (let key in filters) {
       if (filters[key] !== 'Any') {
         additionalPages++;
@@ -81,34 +81,35 @@ function UserInputForm() {
     const endPage = startPage + additionalPages + 6;
 
     let showData = [];
-    
-    
+
+
     for (let page = startPage + 1; page <= endPage; page++) {
       axios({
         url: 'http://api.tvmaze.com/shows',
         params: {
-          // Set the random integer returned from the fucntion to the url parameters
+          // Set the random integer returned from the function to the url parameters
           page: page,
         }
       }).then(({ data }) => {
 
         //push the data from the first page into the array and then the second and so on
         showData.push(...data.map((show) => new tvShow(show)))
-        
+
         // when this is the last loop then enter this statement
         if (page === endPage) {
-          
+
 
           setShowResults(
             showData
-            .filter(show => {
-              //filter the data by genre and language, if it is equal then return that show
-                  return (filters.genre === 'Any' || show.genres.includes(filters.genre)) && show.language === filters.language;
+              .filter(show => {
+                //filter the data by genre and language, if it is equal then return that show
+                return (filters.genre === 'Any' || show.genres.includes(filters.genre)) && show.language === filters.language;
 
-            })
-            //after filtering slice the first 10 random objects from the array and set them to showResults
-            .slice(0, 10)
-      )}
+              })
+              //after filtering slice the first 10 random objects from the array and set them to showResults
+              .slice(0, 10)
+          )
+        }
       }).catch(error => {
         return Swal.fire(tvAlert);
       })
@@ -186,17 +187,14 @@ function UserInputForm() {
           Randomize!
         </button>
       </form>
-      <ul>
-          {showResults ? showResults.map(show =>
-          <>
-            <li className="tvShow" key={show.id.firebase}>
-              <TVCardSmall tvShow={show} />
-            </li>
-          </>
-          ) : "no shows"}
-      </ul>
+
+      {/* Display search results as a BingeList */}
+      { showResults ?
+        <BingeList tvShows={showResults} /> :
+        <h3>Working...</h3>
+      }
     </>
   )
 }
 
-export default UserInputForm;
+export default UserInput;
