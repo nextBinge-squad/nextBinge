@@ -16,9 +16,11 @@ function TVCard({ tvShow }) {
         )}</p>
       </div>
 
-      <image>
-        <img src={tvShow.image} alt="poster of tv series..." />
-      </image>
+      <Link to={'/TVCardBig'}>
+        <image>
+          <img src={tvShow.image} alt="poster of tv series..." />
+        </image>
+      </Link>
 
 
       {/* displays tv show priority */}
