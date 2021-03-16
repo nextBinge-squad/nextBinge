@@ -3,8 +3,8 @@
 
 import { useState } from 'react';
 import axios from 'axios';
-import tvShow from '../data/tvShow';
 import Swal from 'sweetalert2';
+import dropdowns from '../data/tvShowDropdowns';
 
 function UserInputForm({ setShowResults }) {
 
@@ -48,9 +48,7 @@ function UserInputForm({ setShowResults }) {
         q: name,
       },
     }).then(({ data }) =>
-      setShowResults(data.map(
-        ({ show }) => new tvShow(show)
-      ))
+      setShowResults(data.map(({ show }) => show))
     ).catch((error) => {
       Swal.fire(tvAlert);
     });
@@ -99,7 +97,6 @@ function UserInputForm({ setShowResults }) {
 
       setShowResults(
         showData
-          .map(show => new tvShow(show))
           .filter(show => (
             // Filters
 
