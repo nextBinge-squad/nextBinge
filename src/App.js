@@ -1,5 +1,5 @@
-// css
-import './App.css';
+// sass
+import './styles/App.scss';
 // hooks
 import { useState, useEffect } from 'react';
 // data
