@@ -1,4 +1,5 @@
 const dropdowns = {
+
   status: [
     "",
     "Running",
@@ -6,6 +7,7 @@ const dropdowns = {
     "To Be Determined",
     "In Development",
   ],
+
   type: [
     "",
     "Scripted",
@@ -20,6 +22,7 @@ const dropdowns = {
     "Award Show",
     "Panel Show",
   ],
+
   genre: [
     "",
     "Action",
@@ -51,6 +54,7 @@ const dropdowns = {
     "War",
     "Western",
   ],
+
   language: [
     "",
     "Afrikaans",
@@ -123,6 +127,7 @@ const dropdowns = {
     "Welsh",
     "Scottish Gaelic",
   ],
+
   country: [
     "",
     "Afghanistan",
@@ -212,7 +217,8 @@ const dropdowns = {
     "Venezuela, Bolivarian Republic of",
     "Viet Nam",
   ],
-  // to be split into optgroups
+
+  // has optgroups
   network: {
     "Global": [
       "",
@@ -2088,6 +2094,8 @@ const dropdowns = {
       "VTV3",
     ],
   },
+
+  // has optgroups
   webChannel: {
     Global: [
       "",
@@ -2608,20 +2616,80 @@ const dropdowns = {
       "Puhu TV",
     ],
   },
+
+  // has separate str and val properties
   runtime: [
-    "30 minutes or less",
-    "30 to 60 minutes",
-    "Over 60 minutes",
+    {
+      str: "30 minutes or less",
+      val: {
+        max: 30,
+        min: 0,
+      }
+    },
+    {
+      str: "30 to 60 minutes",
+      val: {
+        max: 60,
+        min: 30,
+      }
+    },
+    {
+      str: "Over 60 minutes",
+      val: {
+        max: Infinity,
+        min: 60,
+      }
+    },
   ],
-  rating: [,
-    "2+",
-    "3+",
-    "4+",
-    "5+",
-    "6+",
-    "7+",
-    "8+",
-    "9+",
+
+  rating: [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
   ],
 }
-export default dropdowns;
+
+// given a category name, uses "dropdowns" object structure to generate a <select> tag, and populate it with corresponding <option>'s.
+const generateDropdown = category => {
+
+  const generateOption = choices => <option value={choice}>{choice}</option>;
+
+  let options;
+
+  switch (category) {
+    case "network":
+    case "webChannel":
+      options = dropdowns[category].map(grouping => (
+        <optgroup label={grouping}>
+          {dropdowns[category][grouping].map(choice => (
+            <option value={choice}>choice</option>
+          ))}
+        </optgroup>
+      ))
+      break;
+    case "runtime":
+      break;
+    default:
+      break;
+  }
+
+  return (<>
+    <label htmlFor={category} className="sr-only">{category}</label>
+    <select id={category}>
+
+      {dropdowns[category].map(choice => {
+
+
+        <option value={choice}>{choice}</option>
+      })}
+
+    </select>
+  </>);
+}
+export { dropdowns, generateDropdown };
