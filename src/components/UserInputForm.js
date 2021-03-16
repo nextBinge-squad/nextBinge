@@ -91,18 +91,23 @@ function UserInputForm() {
           page: page,
         }
       }).then(({ data }) => {
+
+        //push the data from the first page into the array and then the second and so on
         showData.push(...data.map((show) => new tvShow(show)))
         
+        // when this is the last loop then enter this statement
         if (page === endPage) {
-          const showAmount = 10;
-          const randIndex = getRandomNumber(showData.length - showAmount);
           
+
           setShowResults(
             showData
             .filter(show => {
+              //filter the data by genre and language, if it is equal then return that show
                   return (filters.genre === 'Any' || show.genres.includes(filters.genre)) && show.language === filters.language;
 
-            }).slice(0, 10)
+            })
+            //after filtering slice the first 10 random objects from the array and set them to showResults
+            .slice(0, 10)
       )}
       }).catch(error => {
         return Swal.fire(tvAlert);
