@@ -43,7 +43,7 @@ function App() {
     <Router>
       <>
         <Link to={'/'}><h1>nextBinge</h1></Link>
-        <UserInputForm setShowResults={setShowResults} />
+        <UserInputForm />
 
         { showResults ? 
           <BingeList tvShows={showResults} /> :
