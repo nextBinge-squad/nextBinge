@@ -50,7 +50,7 @@ function App() {
           <h3>Working...</h3>
         }
 
-        {/* <Route path="/" exact component={TVCardSmall}/> */}
+        {/* <Route path="/TVCardSmall" exact component={TVCardSmall}/> */}
         <Route path="/TVCardBig" exact component={TVCardBig} />
 
         <footer>
