@@ -15,6 +15,8 @@ class tvShow {
     image,
     summary,
     language,
+    id,
+    rating,
   }) {
     this.name = name;
     this.genres = [...genres];

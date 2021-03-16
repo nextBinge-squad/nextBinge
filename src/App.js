@@ -1,5 +1,5 @@
-// css
-import './App.css';
+// sass
+import './styles/App.scss';
 // hooks
 import { useState, useEffect } from 'react';
 // data
@@ -7,6 +7,10 @@ import tvShow from './data/tvShow';
 // firebase
 import firebase from './firebase-config';
 import { dbref, pathref } from './firebase-config';
+
+// React router dom
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 // components
 import UserInputForm from './components/UserInputForm';
 import TVCardSmall from './components/TVCardSmall';
@@ -36,20 +40,24 @@ function App() {
   }, []);
 
   return (
-    <>
-      <h1>nextBinge</h1>
-      <UserInputForm setShowResults={setShowResults} />
+    <Router>
+      <>
+        <Link to={'/'}><h1>nextBinge</h1></Link>
+        <UserInputForm setShowResults={setShowResults} />
 
-      { showResults ? 
-        <BingeList tvShows={showResults} /> :
-        <h3>Working...</h3>
-      }
+        { showResults ? 
+          <BingeList tvShows={showResults} /> :
+          <h3>Working...</h3>
+        }
 
-      <footer>
-        <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal & Lawrence Lee</p>
-      </footer>
+        {/* <Route path="/TVCardSmall" exact component={TVCardSmall}/> */}
+        <Route path="/TVCardBig" exact component={TVCardBig} />
 
-    </>
+        <footer>
+          <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal & Lawrence Lee</p>
+        </footer>
+      </>
+  </Router>
   );
 }
 
