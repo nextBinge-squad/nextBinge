@@ -3,9 +3,9 @@ import TVCardSmall from "./TVCardSmall";
 // tvShows should be an array of tvShow objects
 function BingeList({ tvShows }) {
 
-  // defines a sorting criterion: sort based on tv shows' "priority" property
+  // defines a sorting criterion: compare two shows' upvote count
   const compareShows = (tvShow1, tvShow2) =>
-    tvShow2.priority - tvShow1.priority;
+    tvShow2.upvotes - tvShow1.upvotes;
 
   return (
     <ul className="UserList">

@@ -9,13 +9,17 @@ function TVCardSmall({ tvShow }) {
       {/* displays TV Show name and image for small search results */}
       <div className="tvShow">
         <p>{tvShow.name}</p>
-        <p>{tvShow.genres[0]} {tvShow.genres[1]} {tvShow.genres[2]} </p>
+        <p>{tvShow.genres.map((genre, index) =>
+          <>
+            {genre}{index === tvShow.genres.length - 1 ? '' : ', '}
+          </>
+        )}</p>
       </div>
 
       <image>
         <img src={tvShow.image} alt="poster of tv series..." />
       </image>
-        
+
 
       {/* displays tv show priority */}
       <p>priority: {tvShow.priority}</p>

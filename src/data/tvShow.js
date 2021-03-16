@@ -1,12 +1,11 @@
 class tvShow {
 
   id = {
-    firebase: '',
-    tvmaze: '',
+    network: '',
+    webChannel: '',
   };
 
-  // priority = 0;
-  priority = Math.random();
+  upvotes = 0;
 
   constructor({
     name,
