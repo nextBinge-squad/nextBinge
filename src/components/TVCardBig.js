@@ -11,7 +11,7 @@ function TVCardBig({ tvShow }) {
 
   return (
     <>
-      <h3>Continuum</h3>
+      <h3>{tvShow.name}</h3>
       <img src='https://static.tvmaze.com/uploads/images/medium_portrait/0/184.jpg' alt="poster of tv series..." />
 
       <p>Summary: Continuum is a one-hour police drama centered on Kiera Cameron, a regular cop from 65 years in the future who finds herself trapped in present day Vancouver. She is alone, a stranger in a strange land, and has eight of the most ruthless criminals from the future, known as Liber8, loose in the city.
