@@ -1,7 +1,7 @@
 
-import TVCardBig from './TVCardBig';
+import TVInfoPage from './TVInfoPage';
 
-function TVCardSmall({ tvShow }) {
+function TVCard({ tvShow }) {
   console.log(tvShow);
 
   return (
@@ -31,4 +31,4 @@ function TVCardSmall({ tvShow }) {
   )
 }
 
-export default TVCardSmall;
+export default TVCard;

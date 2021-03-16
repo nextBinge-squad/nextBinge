@@ -1,4 +1,4 @@
-class tvShowList {
+class bingeList {
   /**
    * basically an array with a name attached
    * @param {string} name this tv show list's name
@@ -11,4 +11,4 @@ class tvShowList {
   }
 }
 
-export default tvShowList;
+export default bingeList;

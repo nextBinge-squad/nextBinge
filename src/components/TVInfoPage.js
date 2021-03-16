@@ -2,7 +2,7 @@
 // Information available is the following: Name of TV series, genres, image, language, priority, summary, webChannel
 
 
-function TVCardBig({ tvShow }) {
+function TVInfoPage({ tvShow }) {
   // const getGenres = (genres) => {
   //   tvShow.genres.map(genres);
   //   console.log(genres);
@@ -32,4 +32,4 @@ function TVCardBig({ tvShow }) {
   )
 }
 
-export default TVCardBig;
+export default TVInfoPage;
