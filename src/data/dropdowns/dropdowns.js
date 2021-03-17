@@ -43,24 +43,15 @@ const dropdowns = {
   runtime: [
     {
       str: "30 minutes or less",
-      val: {
-        max: 30,
-        min: 0,
-      }
+      val: [0, 30],
     },
     {
       str: "30 to 60 minutes",
-      val: {
-        max: 60,
-        min: 30,
-      }
+      val: [30, 60],
     },
     {
       str: "Over 60 minutes",
-      val: {
-        max: Infinity,
-        min: 60,
-      }
+      val: [60, Infinity]
     },
   ],
 

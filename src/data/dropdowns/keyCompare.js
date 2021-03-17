@@ -38,7 +38,7 @@
     // runtime must be *between* selected bounds
     case 'runtime':
       const { runtime } = show;
-      const { min, max } = filters.runtime;
+      const [ min, max ] = filters.runtime;
       match = (
         min <= runtime && runtime <= max
       );

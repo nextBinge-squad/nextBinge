@@ -12,7 +12,7 @@ const DEFAULT_OPTION = "";
  */
 const generateOptions = choices =>
   choices.map(
-    choice => <option value={choice}> {choice} </option>
+    (choice, i) => <option value={choice} key={i}> {choice} </option>
   );
 
 /**
@@ -39,8 +39,8 @@ function DynamicDropdown({ category, state, setState }) {
       const groupNames = Object.keys(dropdowns[category]);
 
       // "for each grouping..."
-      options = groupNames.map(grouping => (
-        <optgroup label={grouping}>
+      options = groupNames.map((grouping, i) => (
+        <optgroup label={grouping} key={i}>
           {/* ...generate an optgroup with that grouping's options */}
           {generateOptions(dropdowns[category][grouping])}
         </optgroup>
@@ -50,14 +50,14 @@ function DynamicDropdown({ category, state, setState }) {
     // special case: option values and labels are different
     case "runtime":
       options = dropdowns.runtime.map(
-        opt => <option value={opt.val}> {opt.str} </option>
+        (opt, i) => <option value={opt.val} key={i}> {opt.str} </option>
       );
       break;
 
     // special case: option values and labels are different
     case "rating":
       options = dropdowns.rating.map(
-        opt => <option value={opt}>{opt}+</option>
+        (opt, i) => <option value={opt} key={i}>{opt}+</option>
       );
       break;
 
@@ -67,7 +67,7 @@ function DynamicDropdown({ category, state, setState }) {
   }
 
   // add default to beginning of each dropdown
-  options.unshift(<option value={DEFAULT_OPTION}> {DEFAULT_OPTION} </option>);
+  options.unshift(<option value={DEFAULT_OPTION} key={-1}> {DEFAULT_OPTION} </option>);
 
   return (
     <>
