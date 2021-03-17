@@ -9,9 +9,7 @@ function TVCardSmall({ tvShow }) {
       
 
       <Link to={'/TVCardSmall/TVCardBig'}>
-        <image>
-          <img src={tvShow.image} alt={`Poster of ${tvShow.name}...`} />
-        </image>
+          <img src={tvShow.image.medium} alt={`Poster of ${tvShow.name}...`} />
       </Link>
 
       {/* displays TV Show name and image for small search results */}
