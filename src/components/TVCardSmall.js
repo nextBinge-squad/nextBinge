@@ -15,11 +15,11 @@ function TVCardSmall({ tvShow }) {
       {/* displays TV Show name and image for small search results */}
       <div className="tvShow">
         <p>{tvShow.name}</p>
-        {/* <p>{tvShow.genres.map((genre, index) =>
+        <p>{tvShow.genres.map((genre, index) =>
           <>
             {genre}{index === tvShow.genres.length - 1 ? '' : ', '}
           </>
-        )}</p> */}
+        )}</p>
 
         {/* displays tv show priority */}
         <p>rating: {tvShow.rating.average}</p>
