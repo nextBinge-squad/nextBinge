@@ -91,20 +91,67 @@ function UserInput() {
       }).then(({ data }) => {
 
         //push the data from the first page into the array and then the second and so on
-        showData.push(...data.map((show) => new tvShow(show)))
+        showData.push(...data)
 
         // when this is the last loop then enter this statement
         if (page === endPage) {
 
-
           setShowResults(
             showData
               .filter(show => {
-                //filter the data by genre and language, if it is equal then return that show
-                return (filters.genre === 'Any' || show.genres.includes(filters.genre)) && show.language === filters.language;
 
+                let success = true;
+
+                for (let key in filters) {
+
+                  // only test this key if present in both show and filters
+                  if (!(filters[key] && show[key])) continue;
+
+                  switch (key) {
+
+                    default:
+                      success = (show[key] === filters[key]);
+                      break;
+
+                    // special cases
+                    case 'genres':
+                      success = (show.genres.includes(filters[key]));
+                      break;
+
+                    case 'runtime':
+                      const { runtime } = show;
+                      const { min, max } = filters.runtime;
+                      success = (
+                        min <= runtime && runtime <= max
+                      );
+                      break;
+
+                    case 'rating':
+                      success = (show.rating >= filters.rating);
+                      break;
+
+                    case 'network':
+                    case 'webChannel':
+                      success = (show[key].name === filters[key]);
+                      break;
+
+                    case 'country':
+                      // only some shows have a country
+                      // country may be noted under:
+                      // 1. show.network.country.name
+                      // 2. show.webChannel.country.name
+                      if (show[key].country) {
+                        success = (show[key].country.name === filters.country);
+                      }
+                      break;
+                  }
+
+                  // if a test fails, fail early
+                  if (!success) return false;
+                }
+                // return true only if all tests pass
+                return true;
               })
-              //after filtering slice the first 10 random objects from the array and set them to showResults
               .slice(0, 10)
           )
         }
@@ -162,7 +209,9 @@ function UserInput() {
         }}
       >
 
-        {categories.map(category => generateDropdown(category))}
+        {categories.map(category =>
+          generateDropdown(category, filters, setFilters)
+        )}
 
         <label htmlFor="randomize" className="sr-only">
           Press for random TV shows:

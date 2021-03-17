@@ -2664,18 +2664,32 @@ const generateOptions = (choices, base = DEFAULT_OPTION) => {
   return options;
 };
 
-// given a category name, uses "dropdowns" object structure to generate a <select> tag, and populate it with corresponding <option>'s.
-const generateDropdown = category => {
+/**
+ * generates a controlled input dropdown based on a category
+ * @param {string} category A key existing within "dropdowns"
+ * @param {object} state some state (from useReducer)
+ * @param {function} setState a state dispatcher
+ * @returns a controlled dropdown input (<select>) bound to state & setState
+ */
+const generateDropdown = (category, state, setState) => {
 
   let options;
 
+  // customizes dropdown render based on category
+  // (several categories are special cases)
   switch (category) {
 
-    // special cases: must be generated per optgroup
+    // special cases: must be generated based on optgroup
     case "network":
     case "webChannel":
-      options = Object.keys(dropdowns[category]).map(grouping => (
+
+      // list of optgroup names
+      const groupNames = Object.keys(dropdowns[category]);
+
+      // "for each grouping..."
+      options = groupNames.map(grouping => (
         <optgroup label={grouping}>
+          {/* ...generate an optgroup with that grouping's options */}
           {generateOptions(dropdowns[category][grouping])}
         </optgroup>
       ));
@@ -2684,10 +2698,20 @@ const generateDropdown = category => {
       );
       break;
 
-    // special case: each option's value is different from their html text
+    // special case: option values and labels are different
     case "runtime":
-      options = dropdowns[category].map(
+      options = dropdowns.runtime.map(
         opt => <option value={opt.val}> {opt.str} </option>
+      );
+      options.unshift(
+        <option value={DEFAULT_OPTION}> {DEFAULT_OPTION} </option>
+      );
+      break;
+    
+    // special case: option values and labels are different
+    case "rating":
+      options = dropdowns.rating.map(
+        opt => <option value={opt}>{opt}+</option>
       );
       options.unshift(
         <option value={DEFAULT_OPTION}> {DEFAULT_OPTION} </option>
@@ -2702,7 +2726,16 @@ const generateDropdown = category => {
   return (
     <>
       <label htmlFor={category}>{category}: </label>
-      <select id={category}> {options} </select>
+      <select id={category}
+
+        value={state[category]}
+        onChange={event => setState({
+          key: category,
+          value: event.target.value
+        })}
+      >
+        {options}
+      </select>
       <br />
     </>
   );
