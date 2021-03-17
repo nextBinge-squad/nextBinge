@@ -9,7 +9,7 @@ main {
   padding-top: 20px;
   font-size: 2rem;
   button{
-    background-color: $blue-grotto;
+    background-color: $blue;
     color: white;
     padding: 5px 12px;
     border-radius: 5px;
@@ -17,9 +17,31 @@ main {
     border: none;
     margin-left: 20px;
     cursor: pointer;
+    transition-duration: 0.5s;
   }
   
+  button:hover,
+  button:focus {
+    background-color: $baby-blue;
+  }
 }
+
+.randomizeButton {
+  background-color: $navy-blue;
+  color: white;
+  border-radius: 10px;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  transition-duration: 0.6s;
+}
+
+.randomizeButton:hover,
+.randomizeButton:focus {
+  background-color: $blue-grotto;
+}
+
+
 
 .allResults {
   ul{
@@ -35,6 +57,13 @@ main {
       border: 1px solid $baby-blue;
       border-radius: 35px;
       padding: 10px 10px;
+      transition-duration: 0.7s;
+    }
+
+    li:hover,
+    li:focus {
+      background-color: $navy-blue;
+      color: white;
     }
 
     img {
@@ -57,9 +86,11 @@ main {
         background-color: $navy-blue;
         color: white;
         border-radius: 35px;
+        border: none;
       }
 
-      button:hover {
+      button:hover,
+      button:focus {
         background-color: $blue-grotto;
       }
 
