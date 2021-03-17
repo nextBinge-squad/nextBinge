@@ -17,10 +17,10 @@ import axios from 'axios';
 // sweet alert
 import Swal from 'sweetalert2';
 // react router dom
-import { 
-  BrowserRouter as Router, 
-  Route, 
-  Link 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
 } from 'react-router-dom';
 
 function App() {
@@ -33,17 +33,21 @@ function App() {
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
-        <Link to={'/'}><h1>nextBinge</h1></Link>
+      <div className="nextBinge wrapper">
+        <header>
+          <Link to={'/'}><h1 className="title">nextBinge</h1></Link>
+        </header>
 
         <UserInput />
 
-        <Route path="/TVCardSmall" exact component={TVCardSmall}/>
+        <Route path="/TVCardSmall" exact component={TVCardSmall} />
         <Route path="/TVCardSmall/TVCardBig" exact component={TVCardBig} />
 
         <footer>
           <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal & Lawrence Lee</p>
         </footer>
-  </Router>
+      </div>
+    </Router>
   );
 }
 

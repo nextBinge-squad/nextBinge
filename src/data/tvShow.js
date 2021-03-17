@@ -39,6 +39,14 @@ class tvShow {
       this.webChannel = webChannel.name;
       this.id.webChannel = webChannel.id;
     }
+
+    if (rating) {
+      this.rating = rating.average;
+    }
+
+    if(id){
+      this.id = id;
+    }
   }
 }
 
