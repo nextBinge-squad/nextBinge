@@ -31,12 +31,12 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
         <Link to={'/'}><h1>nextBinge</h1></Link>
 
         <UserInput />
 
-        {/* <Route path="/TVCardSmall" exact component={TVCardSmall}/> */}
+        <Route path="/TVCardSmall" exact component={TVCardSmall}/>
         <Route path="/TVCardBig" exact component={TVCardBig} />
 
         <footer>

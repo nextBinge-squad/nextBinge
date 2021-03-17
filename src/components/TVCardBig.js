@@ -1,16 +1,19 @@
 // Component for detailed TV show information for the user. After search results this will be available after the user hovers over title and will be provided with this data on the right side of the modal.
 // Information available is the following: Name of TV series, genres, image, language, priority, summary, webChannel
 
+import { Link } from 'react-router-dom';
 
 function TVCardBig({ tvShow }) {
-  // const getGenres = (genres) => {
-  //   tvShow.genres.map(genres);
-  //   console.log(genres);
-  // }
   
 
   return (
     <>
+      {/* Back button */}
+      <Link to={'/'}><button>Back</button></Link>
+
+      {/* Button to add tv show to list */}
+      <button>&#x2B;</button>
+
       <div className="tvShowDetails">
         <h3>Continuum</h3>
         <img src='https://static.tvmaze.com/uploads/images/medium_portrait/0/184.jpg' alt="poster of tv series..." />
