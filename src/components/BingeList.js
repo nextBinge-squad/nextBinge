@@ -18,6 +18,7 @@ function BingeList(props) {
   // spliceShows() args are the same as array.splice() args
   const [shows, spliceShows] = useReducer(
     // reducer
+
     (state, ...args) => {
       const shows = state;
       // use splice() to add/remove elements from shows[]
@@ -36,7 +37,7 @@ function BingeList(props) {
       ({ id }) => !shows.some(show => show.id === id)
     );
     // use splice() to add directly onto end of array (see reducer)
-    spliceShows(shows.length, 0, ...args);
+    spliceShows(shows.length, 0, ...valid);
   };
 
   // uses spliceShows() to remove any number of shows from shows[]
@@ -47,7 +48,7 @@ function BingeList(props) {
     if (index === -1) return;
     // use splice() to remove directly from array at index (see reducer)
     spliceShows(index, 1);
-  })
+  });
 
   return (<>
     <h3>
