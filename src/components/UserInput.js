@@ -137,7 +137,7 @@ function UserInput() {
             type="text"
             id="searchField"
             className="searchField"
-            placeholder="Search..."
+            placeholder="Find your next binge..."
             value={textInput}
             onChange={(event) => setTextInput(event.target.value)}
           />

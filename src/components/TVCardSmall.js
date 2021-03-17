@@ -1,5 +1,4 @@
 
-import TVCardBig from './TVCardBig';
 import { Link } from 'react-router-dom';
 
 function TVCardSmall({ tvShow }) {
@@ -26,7 +25,7 @@ function TVCardSmall({ tvShow }) {
         <p>{tvShow.id}</p>
 
         {/* Button to add tv show to list */}
-        <button>&#x2B;</button>
+        <button className="addList">&#x2B;</button>
       </div>
 
      
