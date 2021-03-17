@@ -4,7 +4,7 @@
 import { useState, useReducer } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import DynamicDropdown, { dropdowns } from './DynamicDropdown';
+import DynamicDropdown, { dropdowns, keyCompare } from './DynamicDropdown';
 import BingeList from './BingeList';
 
 function UserInput() {
@@ -89,7 +89,7 @@ function UserInput() {
       }).then(({ data }) => {
 
         //push the data from the first page into the array and then the second and so on
-        showData.push(...data)
+        showData.push(...data);
 
         // when this is the last loop then enter this statement
         if (page === endPage) {
@@ -97,57 +97,11 @@ function UserInput() {
           setShowResults(
             showData
               .filter(show => {
-
-                let success = true;
-
                 for (let key in filters) {
-
-                  // only test this key if present in both show and filters
-                  if (!(filters[key] && show[key])) continue;
-
-                  switch (key) {
-
-                    default:
-                      success = (show[key] === filters[key]);
-                      break;
-
-                    // special cases
-                    case 'genres':
-                      success = (show.genres.includes(filters[key]));
-                      break;
-
-                    case 'runtime':
-                      const { runtime } = show;
-                      const { min, max } = filters.runtime;
-                      success = (
-                        min <= runtime && runtime <= max
-                      );
-                      break;
-
-                    case 'rating':
-                      success = (show.rating >= filters.rating);
-                      break;
-
-                    case 'network':
-                    case 'webChannel':
-                      success = (show[key].name === filters[key]);
-                      break;
-
-                    case 'country':
-                      // only some shows have a country
-                      // country may be stored under:
-                      // 1. show.network.country.name
-                      // 2. show.webChannel.country.name
-                      if (show[key].country) {
-                        success = (show[key].country.name === filters.country);
-                      }
-                      break;
+                  if (!keyCompare(key, show, filters)) {
+                    return false;
                   }
-
-                  // if a test fails, fail early
-                  if (!success) return false;
                 }
-                // return true only if all tests pass
                 return true;
               })
               .slice(0, 10)
@@ -209,7 +163,7 @@ function UserInput() {
 
         {categories.map((category, i) =>
 
-          <DynamicDropdown 
+          <DynamicDropdown
             category={category}
             state={filters}
             setState={setFilters}

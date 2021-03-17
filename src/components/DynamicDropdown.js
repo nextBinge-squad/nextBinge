@@ -21,7 +21,7 @@ const dropdowns = {
     "Panel Show",
   ],
 
-  genre: [
+  genres: [
     "Action",
     "Adult",
     "Adventure",
@@ -2585,7 +2585,7 @@ const dropdowns = {
       "SVT Play",
       "TV4 Play",
     ],
-    "Taiwan": [,
+    "Taiwan, Province of China": [,
       "CHOCO TV",
       "CHT MOD",
       "Coture",
@@ -2651,18 +2651,12 @@ const DEFAULT_OPTION = "";
 /**
  * generates a set of dropdown options from an array of strings
  * @param {array} choices an array of strings
- * @param {string} base the default value of the dropdown
  * @returns an array of JSX <option> literals based on options[]
  */
-const generateOptions = (choices, base = DEFAULT_OPTION) => {
-
-  const options = choices.map(
+const generateOptions = choices =>
+  choices.map(
     choice => <option value={choice}> {choice} </option>
   );
-  options.unshift(<option value={base}> {base} </option>);
-
-  return options;
-};
 
 /**
  * renders a controlled input dropdown based on a category
@@ -2671,7 +2665,7 @@ const generateOptions = (choices, base = DEFAULT_OPTION) => {
  * @param {function} setState a state dispatcher
  * @returns a controlled dropdown input (<select>) bound to state & setState
  */
-const DynamicDropdown = ({category, state, setState}) => {
+function DynamicDropdown({ category, state, setState }) {
 
   let options;
 
@@ -2693,9 +2687,6 @@ const DynamicDropdown = ({category, state, setState}) => {
           {generateOptions(dropdowns[category][grouping])}
         </optgroup>
       ));
-      options.unshift(
-        <option value={DEFAULT_OPTION}> {DEFAULT_OPTION} </option>
-      );
       break;
 
     // special case: option values and labels are different
@@ -2703,18 +2694,12 @@ const DynamicDropdown = ({category, state, setState}) => {
       options = dropdowns.runtime.map(
         opt => <option value={opt.val}> {opt.str} </option>
       );
-      options.unshift(
-        <option value={DEFAULT_OPTION}> {DEFAULT_OPTION} </option>
-      );
       break;
-    
+
     // special case: option values and labels are different
     case "rating":
       options = dropdowns.rating.map(
         opt => <option value={opt}>{opt}+</option>
-      );
-      options.unshift(
-        <option value={DEFAULT_OPTION}> {DEFAULT_OPTION} </option>
       );
       break;
 
@@ -2722,6 +2707,9 @@ const DynamicDropdown = ({category, state, setState}) => {
       options = generateOptions(dropdowns[category]);
       break;
   }
+
+  // add default to beginning of each dropdown
+  options.unshift(<option value={DEFAULT_OPTION}> {DEFAULT_OPTION} </option>);
 
   return (
     <>
@@ -2739,6 +2727,78 @@ const DynamicDropdown = ({category, state, setState}) => {
       <br />
     </>
   );
+};
+
+/**
+ * helper function holding the logic of show/filter key comparisons
+ * @param {string} key a key from the dropdowns object
+ * @param {object} show a tv show object from the TVmaze API
+ * @param {object} filters the "filters" reduced state from UserInput
+ * @returns true if show[key] matches the constraints of filters[key]
+ */
+const keyCompare = (key, show, filters) => {
+
+  // if this key is unspecified in filter, 
+  // evaluate as true
+  if (!filters[key]) {
+    return true;
+  }
+
+  // if this key is specified in filter but not on the show object, 
+  // evaluate as false
+  if (!show[key]) {
+    return false;
+  }
+
+  let match = true;
+
+  // check whether this key requires a special testing procedure
+  switch (key) {
+
+    default:
+      match = (show[key] === filters[key]);
+      break;
+
+    // special cases
+
+    // genres must *include* selected genre
+    case 'genres':
+      match = (show.genres.includes(filters.genres));
+      break;
+
+    // runtime must be *between* selected bounds
+    case 'runtime':
+      const { runtime } = show;
+      const { min, max } = filters.runtime;
+      match = (
+        min <= runtime && runtime <= max
+      );
+      break;
+
+    // rating must be selected figure *or higher*
+    case 'rating':
+      match = (show.rating >= filters.rating);
+      break;
+
+    // test network/webchannel *name*
+    case 'network':
+    case 'webChannel':
+      match = (show[key].name === filters[key]);
+      break;
+
+    // shows have no "country" property;
+    // 1. check for network or webchannel
+    // 2. test (network/webchannel).country.name
+    case 'country':
+      const country =
+        (show.network || show.webChannel).country.name;
+
+      match = (country === filters.country);
+      break;
+  }
+
+  return match;
 }
+
 export default DynamicDropdown;
-export { dropdowns };
+export { dropdowns, keyCompare };
