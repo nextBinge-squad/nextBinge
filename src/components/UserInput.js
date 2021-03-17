@@ -4,8 +4,9 @@
 import { useState, useReducer } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import DynamicDropdown, { dropdowns, keyCompare } from './DynamicDropdown';
+import DynamicDropdown, { categories } from './DynamicDropdown';
 import BingeList from './BingeList';
+import keyCompare from '../data/dropdowns/keyCompare';
 
 function UserInput() {
 
@@ -114,8 +115,6 @@ function UserInput() {
       })
     }
   };
-
-  const categories = Object.keys(dropdowns);
 
   return (
     <>
