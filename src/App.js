@@ -5,22 +5,23 @@ import { useState, useEffect } from 'react';
 // data
 import tvShow from './data/tvShow';
 // firebase
-import firebase from './firebase-config';
-import { dbref, pathref } from './firebase-config';
-
-// React router dom
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
+import firebase, { dbref, pathref } from './firebase-config';
 // components
 import UserInput from './components/UserInput';
 import TVCardSmall from './components/TVCardSmall';
 import TVCardBig from './components/TVCardBig';
 import BingeList from './components/BingeList';
 // 3rd party
-  // axios
+// axios
 import axios from 'axios';
-  // Sweet Alert
+// sweet alert
 import Swal from 'sweetalert2';
+// react router dom
+import { 
+  BrowserRouter as Router, 
+  Route, 
+  Link 
+} from 'react-router-dom';
 
 function App() {
 
