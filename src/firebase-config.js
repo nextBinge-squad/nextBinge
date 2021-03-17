@@ -15,5 +15,7 @@ firebase.initializeApp(firebaseConfig);
 const dbref = firebase.database().ref();
 const pathref = path => firebase.database().ref(path);
 
+// dbref.root
+
 export default firebase;
 export { dbref, pathref };

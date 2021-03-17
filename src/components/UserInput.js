@@ -1,11 +1,12 @@
 // API data will be called based on user's desired TV series based on name or other criteria such as genre, network etc.
 // Form below will capture that user request, make the API call and return results on the page via a container.
 
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import axios from 'axios';
-import tvShow from '../data/tvShow';
 import Swal from 'sweetalert2';
+import DynamicDropdown, { categories } from './DynamicDropdown';
 import BingeList from './BingeList';
+import keyCompare from '../data/dropdowns/keyCompare';
 
 function UserInput() {
 
@@ -13,19 +14,19 @@ function UserInput() {
 
   const [textInput, setTextInput] = useState('');
 
-  const [filters, setFilters] = useState({
-    language: 'English',
-    genre: 'Any',
-  });
+  // const [filters, setFilters] = useState({
+  //   language: 'English',
+  //   genre: 'Any',
+  // });
 
-  const genreOptions = [
-    'Any',
-    'Comedy',
-    'Adventure',
-    'Action',
-    'Thriller',
-    'Science-Fiction',
-  ];
+  const [filters, setFilters] = useReducer(
+
+    // reducer function: sets filters[key] to value
+    (filters, { key, value }) => ({ ...filters, [key]: value }),
+
+    // initial state
+    {}
+  );
 
   // Total number of pages available at TVmaze API "shows" endpoint.
   const TOTAL_PAGES = 217;
@@ -51,9 +52,7 @@ function UserInput() {
         q: name,
       },
     }).then(({ data }) =>
-      setShowResults(data.map(
-        ({ show }) => new tvShow(show)
-      ))
+      setShowResults(data.map(({ show }) => show))
     ).catch((error) => {
       Swal.fire(tvAlert);
     });
@@ -63,9 +62,7 @@ function UserInput() {
   // Saves results to showResults in App.js.
   const randomShows = () => {
 
-
     const randomPage = getRandomNumber(TOTAL_PAGES);
-
 
     let additionalPages = 0;
 
@@ -87,26 +84,31 @@ function UserInput() {
       axios({
         url: 'http://api.tvmaze.com/shows',
         params: {
-          // Set the random integer returned from the function to the url parameters
           page: page,
         }
       }).then(({ data }) => {
 
         //push the data from the first page into the array and then the second and so on
-        showData.push(...data.map((show) => new tvShow(show)))
+        showData.push(...data);
 
         // when this is the last loop then enter this statement
         if (page === endPage) {
 
+          console.log(showData);
 
           setShowResults(
             showData
               .filter(show => {
-                //filter the data by genre and language, if it is equal then return that show
-                return (filters.genre === 'Any' || show.genres.includes(filters.genre)) && show.language === filters.language;
-
+                for (let key in filters) {
+                  // compare show[key] to filters[key]
+                  if (!keyCompare(key, show, filters)) {
+                    // return false as soon as any comparison fails
+                    return false;
+                  }
+                }
+                // return true only if all comparisons pass
+                return true;
               })
-              //after filtering slice the first 10 random objects from the array and set them to showResults
               .slice(0, 10)
           )
         }
@@ -156,29 +158,23 @@ function UserInput() {
       </div>
 
       {/* "random tv shows" inputs */}
-      <div className="randomInput">
-        <form
-          className="random"
-          onSubmit={(event) => {
-            event.preventDefault();
-            randomShows();
-          }}
-        >
-          {/* possible spot for drop down criteria such as network, review rating */}
+      <form
+        className="random"
+        onSubmit={(event) => {
+          event.preventDefault();
+          randomShows();
+        }}
+      >
 
-          <label htmlFor="genre">Select a Genre (Optional): </label>
-          <select
-            id="genre"
-            className='genre'
-            value={filters.genre}
-            onChange={(event) =>
-              setFilters({ ...filters, genre: event.target.value })
-            }
-          >
-            {genreOptions.map(genre => (
-              <option value={genre}>{genre}</option>
-            ))}
-          </select>
+        {categories.map((category, i) =>
+
+          <DynamicDropdown
+            category={category}
+            state={filters}
+            setState={setFilters}
+            key={i}
+          />
+        )}
 
           <label htmlFor="randomize" className="sr-only">
             Press for random TV shows:
@@ -191,11 +187,10 @@ function UserInput() {
             Randomize!
           </button>
         </form>
-      </div>
 
       {/* Display search results as a BingeList */}
       <div className="allResults">
-        { showResults ?
+        {showResults ?
           <BingeList tvShows={showResults} /> :
           <h3>Working...</h3>
         }

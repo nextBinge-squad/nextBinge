@@ -10,9 +10,7 @@ function TVCard({ tvShow }) {
       
 
       <Link to={'/TVCardSmall/TVCardBig'}>
-        <image>
-          <img src={tvShow.image} alt={`Poster of ${tvShow.name}...`} />
-        </image>
+          <img src={tvShow.image.medium} alt={`Poster of ${tvShow.name}...`} />
       </Link>
 
       {/* displays TV Show name and image for small search results */}
@@ -25,7 +23,7 @@ function TVCard({ tvShow }) {
         )}</p> */}
 
         {/* displays tv show priority */}
-        <p>rating: {tvShow.rating}</p>
+        <p>rating: {tvShow.rating.average}</p>
         <p>{tvShow.id}</p>
 
         {/* Button to add tv show to list */}
