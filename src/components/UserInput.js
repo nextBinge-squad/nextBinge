@@ -94,6 +94,8 @@ function UserInput() {
         // when this is the last loop then enter this statement
         if (page === endPage) {
 
+          console.log(showData);
+
           setShowResults(
             showData
               .filter(show => {

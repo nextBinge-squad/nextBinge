@@ -24,7 +24,7 @@ function TVCardSmall({ tvShow }) {
         )}</p> */}
 
         {/* displays tv show priority */}
-        <p>rating: {tvShow.rating}</p>
+        <p>rating: {tvShow.rating.average}</p>
         <p>{tvShow.id}</p>
 
         {/* Button to add tv show to list */}
