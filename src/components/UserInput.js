@@ -117,41 +117,43 @@ function UserInput() {
   };
 
   return (
-    <>
+    <main>
       {/* "search by name" inputs */}
-      <form
-        className="search"
-        onSubmit={(event) => {
-          event.preventDefault();
-          searchShows(textInput)
-          setTextInput('');
-        }}
-      >
-
-        <label htmlFor="searchField" className="searchField sr-only">Enter the name of a TV show: </label>
-        <input
-          required
-          type="text"
-          id="searchField"
-          className="searchField"
-          placeholder="Search..."
-          value={textInput}
-          onChange={(event) => setTextInput(event.target.value)}
-        />
-
-        {/* Buttons could go here so that user can submit their search query. Additional buttons could be added for randomize. */}
-
-        <label htmlFor="submit" className="sr-only">
-          Press to search TV shows:
-        </label>
-
-        <button
-          type="submit"
-          id="submit"
+      <div className="searchInput">
+        <form
+          className="search"
+          onSubmit={(event) => {
+            event.preventDefault();
+            searchShows(textInput)
+            setTextInput('');
+          }}
         >
-          &#x1F50E;
+
+          <label htmlFor="searchField" className="searchField sr-only">Enter the name of a TV show: </label>
+          <input
+            required
+            type="text"
+            id="searchField"
+            className="searchField"
+            placeholder="Search..."
+            value={textInput}
+            onChange={(event) => setTextInput(event.target.value)}
+          />
+
+          {/* Buttons could go here so that user can submit their search query. Additional buttons could be added for randomize. */}
+
+          <label htmlFor="submit" className="sr-only">
+            Press to search TV shows:
+          </label>
+
+          <button
+            type="submit"
+            id="submit"
+          >
+            &#x1F50E;
         </button>
-      </form>
+        </form>
+      </div>
 
       {/* "random tv shows" inputs */}
       <form
@@ -172,24 +174,26 @@ function UserInput() {
           />
         )}
 
-        <label htmlFor="randomize" className="sr-only">
-          Press for random TV shows:
-        </label>
+          <label htmlFor="randomize" className="sr-only">
+            Press for random TV shows:
+          </label>
 
-        <button
-          type="submit"
-          id="randomize"
-        >
-          Randomize!
-        </button>
-      </form>
+          <button
+            type="submit"
+            id="randomize"
+          >
+            Randomize!
+          </button>
+        </form>
 
       {/* Display search results as a BingeList */}
-      { showResults ?
-        <BingeList tvShows={showResults} /> :
-        <h3>Working...</h3>
-      }
-    </>
+      <div className="allResults">
+        {showResults ?
+          <BingeList tvShows={showResults} /> :
+          <h3>Working...</h3>
+        }
+      </div>
+    </main>
   )
 }
 
