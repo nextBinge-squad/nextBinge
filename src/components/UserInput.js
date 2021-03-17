@@ -5,8 +5,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import tvShow from '../data/tvShow';
 import Swal from 'sweetalert2';
+import BingeList from './BingeList';
 
-function UserInputForm({ setShowResults }) {
+function UserInput() {
+
+  const [showResults, setShowResults] = useState([]);
 
   const [textInput, setTextInput] = useState('');
 
@@ -21,7 +24,7 @@ function UserInputForm({ setShowResults }) {
     'Adventure',
     'Action',
     'Thriller',
-    'Sci-Fi',
+    'Science-Fiction',
   ];
 
   // Total number of pages available at TVmaze API "shows" endpoint.
@@ -60,11 +63,10 @@ function UserInputForm({ setShowResults }) {
   // Saves results to showResults in App.js.
   const randomShows = () => {
 
-    // amount of shows to display
-    const showAmount = 10;
 
-    // for each additional filter, request an additional page from API
-    // counteracts data "thinning" due to filtering
+    const randomPage = getRandomNumber(TOTAL_PAGES);
+
+
     let additionalPages = 0;
 
     for (let key in filters) {
@@ -76,47 +78,42 @@ function UserInputForm({ setShowResults }) {
     // start at a random page
     // if there are additional pages, don't pick a starting page too close to the end
     const startPage = getRandomNumber(TOTAL_PAGES - additionalPages);
+    const endPage = startPage + additionalPages + 6;
 
-    const promises = [];
     let showData = [];
 
-    for (let page = 0; page <= additionalPages; page++) {
-      promises.push(axios({
-        url: 'https://api.tvmaze.com/shows',
+
+    for (let page = startPage + 1; page <= endPage; page++) {
+      axios({
+        url: 'http://api.tvmaze.com/shows',
         params: {
-          page: startPage + page,
+          // Set the random integer returned from the function to the url parameters
+          page: page,
         }
-      }))
+      }).then(({ data }) => {
+
+        //push the data from the first page into the array and then the second and so on
+        showData.push(...data.map((show) => new tvShow(show)))
+
+        // when this is the last loop then enter this statement
+        if (page === endPage) {
+
+
+          setShowResults(
+            showData
+              .filter(show => {
+                //filter the data by genre and language, if it is equal then return that show
+                return (filters.genre === 'Any' || show.genres.includes(filters.genre)) && show.language === filters.language;
+
+              })
+              //after filtering slice the first 10 random objects from the array and set them to showResults
+              .slice(0, 10)
+          )
+        }
+      }).catch(error => {
+        return Swal.fire(tvAlert);
+      })
     }
-
-    Promise.all(promises).then((pages) => {
-
-      pages.forEach(({ data }) => {
-        showData = showData.concat(data);
-      });
-
-      const randIndex = getRandomNumber(showData.length - showAmount);
-
-      setShowResults(
-        showData
-          .map(show => new tvShow(show))
-          .filter(show => (
-            // Filters
-
-            // language
-            show.language === filters.language &&
-
-            // genre
-            (
-              filters.genre === 'Any' ||
-              show.genres.includes(filters.genre)
-            )
-          ))
-          .slice(randIndex, randIndex + showAmount)
-      );
-    }).catch((error) => {
-      Swal.fire(tvAlert);
-    });
   };
 
   return (
@@ -190,8 +187,14 @@ function UserInputForm({ setShowResults }) {
           Randomize!
         </button>
       </form>
+
+      {/* Display search results as a BingeList */}
+      { showResults ?
+        <BingeList tvShows={showResults} /> :
+        <h3>Working...</h3>
+      }
     </>
   )
 }
 
-export default UserInputForm;
+export default UserInput;
