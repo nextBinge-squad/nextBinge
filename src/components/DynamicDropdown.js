@@ -2659,6 +2659,7 @@ const generateOptions = choices =>
   );
 
 /**
+ * Component
  * renders a controlled input dropdown based on a category
  * @param {string} category A key existing within "dropdowns"
  * @param {object} state some state (from useReducer)

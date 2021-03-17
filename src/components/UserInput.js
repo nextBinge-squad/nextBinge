@@ -83,7 +83,6 @@ function UserInput() {
       axios({
         url: 'http://api.tvmaze.com/shows',
         params: {
-          // Set the random integer returned from the function to the url parameters
           page: page,
         }
       }).then(({ data }) => {
@@ -98,10 +97,13 @@ function UserInput() {
             showData
               .filter(show => {
                 for (let key in filters) {
+                  // compare show[key] to filters[key]
                   if (!keyCompare(key, show, filters)) {
+                    // return false as soon as any comparison fails
                     return false;
                   }
                 }
+                // return true only if all comparisons pass
                 return true;
               })
               .slice(0, 10)
