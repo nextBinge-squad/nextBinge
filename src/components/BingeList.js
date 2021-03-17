@@ -58,11 +58,13 @@ function BingeList(props) {
       />
     </h3>
     <ul className="BingeList">
-      {shows.map(show =>
+      {shows ? shows.map(show =>
         <li className="tvShow" key={show.id}>
-          <TVCard tvShow={show} />
+          <TVCard
+            tvShow={show}
+            remove={() => removeShows(show.id)} />
         </li>
-      )}
+      ) : <p>add a show</p>}
     </ul>
   </>);
 }
