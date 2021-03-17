@@ -1,7 +1,9 @@
 
 import TVInfoPage from './TVInfoPage';
+// React router dom
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-function TVCardSmall({ tvShow }) {
+function TVCard({ tvShow }) {
 
   return (
     <>

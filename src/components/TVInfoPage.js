@@ -3,7 +3,7 @@
 
 import { Link } from 'react-router-dom';
 
-function TVCardBig({ tvShow }) {
+function TVInfoPage({ tvShow }) {
   
 
   return (

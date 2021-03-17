@@ -5,16 +5,15 @@ import { useState, useEffect } from 'react';
 // data
 import tvShow from './data/tvShow';
 // firebase
-import firebase from './firebase-config';
-import { dbref, pathref } from './firebase-config';
+import firebase, { dbref, pathref } from './firebase-config';
 
 // React router dom
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 // components
 import UserInput from './components/UserInput';
-import TVCardSmall from './components/TVCardSmall';
-import TVCardBig from './components/TVCardBig';
+import TVCard from './components/TVCard';
+import TVInfoPage from './components/TVInfoPage';
 import BingeList from './components/BingeList';
 // 3rd party
   // axios
@@ -36,8 +35,8 @@ function App() {
 
         <UserInput />
 
-        <Route path="/TVCardSmall" exact component={TVCardSmall}/>
-        <Route path="/TVCardBig" exact component={TVCardBig} />
+        <Route path="/TVCardSmall" exact component={TVCard}/>
+        <Route path="/TVCardBig" exact component={TVInfoPage} />
 
         <footer>
           <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal & Lawrence Lee</p>
