@@ -4,7 +4,7 @@
 import { useState, useReducer } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { dropdowns, generateDropdown } from '../data/tvShowDropdowns';
+import DynamicDropdown, { dropdowns } from './DynamicDropdown';
 import BingeList from './BingeList';
 
 function UserInput() {
@@ -61,9 +61,7 @@ function UserInput() {
   // Saves results to showResults in App.js.
   const randomShows = () => {
 
-
     const randomPage = getRandomNumber(TOTAL_PAGES);
-
 
     let additionalPages = 0;
 
@@ -137,7 +135,7 @@ function UserInput() {
 
                     case 'country':
                       // only some shows have a country
-                      // country may be noted under:
+                      // country may be stored under:
                       // 1. show.network.country.name
                       // 2. show.webChannel.country.name
                       if (show[key].country) {
@@ -209,8 +207,14 @@ function UserInput() {
         }}
       >
 
-        {categories.map(category =>
-          generateDropdown(category, filters, setFilters)
+        {categories.map((category, i) =>
+
+          <DynamicDropdown 
+            category={category}
+            state={filters}
+            setState={setFilters}
+            key={i}
+          />
         )}
 
         <label htmlFor="randomize" className="sr-only">

@@ -2665,13 +2665,13 @@ const generateOptions = (choices, base = DEFAULT_OPTION) => {
 };
 
 /**
- * generates a controlled input dropdown based on a category
+ * renders a controlled input dropdown based on a category
  * @param {string} category A key existing within "dropdowns"
  * @param {object} state some state (from useReducer)
  * @param {function} setState a state dispatcher
  * @returns a controlled dropdown input (<select>) bound to state & setState
  */
-const generateDropdown = (category, state, setState) => {
+const DynamicDropdown = ({category, state, setState}) => {
 
   let options;
 
@@ -2740,5 +2740,5 @@ const generateDropdown = (category, state, setState) => {
     </>
   );
 }
-
-export { dropdowns, generateDropdown };
+export default DynamicDropdown;
+export { dropdowns };
