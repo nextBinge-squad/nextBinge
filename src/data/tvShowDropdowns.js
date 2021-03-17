@@ -1,7 +1,6 @@
 const dropdowns = {
 
   status: [
-    "",
     "Running",
     "Ended",
     "To Be Determined",
@@ -9,7 +8,6 @@ const dropdowns = {
   ],
 
   type: [
-    "",
     "Scripted",
     "Animation",
     "Reality",
@@ -24,7 +22,6 @@ const dropdowns = {
   ],
 
   genre: [
-    "",
     "Action",
     "Adult",
     "Adventure",
@@ -56,7 +53,6 @@ const dropdowns = {
   ],
 
   language: [
-    "",
     "Afrikaans",
     "Albanian",
     "Arabic",
@@ -129,7 +125,6 @@ const dropdowns = {
   ],
 
   country: [
-    "",
     "Afghanistan",
     "Albania",
     "Algeria",
@@ -220,9 +215,6 @@ const dropdowns = {
 
   // has optgroups
   network: {
-    "Global": [
-      "",
-    ],
     "United States": [
       "3net",
       "A&amp;E",
@@ -2098,7 +2090,6 @@ const dropdowns = {
   // has optgroups
   webChannel: {
     Global: [
-      "",
       "Amazon Prime Video",
       "Apple Music",
       "Apple News",
@@ -2643,7 +2634,6 @@ const dropdowns = {
   ],
 
   rating: [
-    0,
     2,
     3,
     4,
@@ -2655,41 +2645,67 @@ const dropdowns = {
   ],
 }
 
+// the default value to be displayed on all dropdowns
+const DEFAULT_OPTION = "";
+
+/**
+ * generates a set of dropdown options from an array of strings
+ * @param {array} choices an array of strings
+ * @param {string} base the default value of the dropdown
+ * @returns an array of JSX <option> literals based on options[]
+ */
+const generateOptions = (choices, base = DEFAULT_OPTION) => {
+
+  const options = choices.map(
+    choice => <option value={choice}> {choice} </option>
+  );
+  options.unshift(<option value={base}> {base} </option>);
+
+  return options;
+};
+
 // given a category name, uses "dropdowns" object structure to generate a <select> tag, and populate it with corresponding <option>'s.
 const generateDropdown = category => {
-
-  const generateOption = choices => <option value={choice}>{choice}</option>;
 
   let options;
 
   switch (category) {
+
+    // special cases: must be generated per optgroup
     case "network":
     case "webChannel":
-      options = dropdowns[category].map(grouping => (
+      options = Object.keys(dropdowns[category]).map(grouping => (
         <optgroup label={grouping}>
-          {dropdowns[category][grouping].map(choice => (
-            <option value={choice}>choice</option>
-          ))}
+          {generateOptions(dropdowns[category][grouping])}
         </optgroup>
-      ))
+      ));
+      options.unshift(
+        <option value={DEFAULT_OPTION}> {DEFAULT_OPTION} </option>
+      );
       break;
+
+    // special case: each option's value is different from their html text
     case "runtime":
+      options = dropdowns[category].map(
+        opt => <option value={opt.val}> {opt.str} </option>
+      );
+      options.unshift(
+        <option value={DEFAULT_OPTION}> {DEFAULT_OPTION} </option>
+      );
       break;
+
     default:
+      options = generateOptions(dropdowns[category]);
       break;
   }
 
-  return (<>
-    <label htmlFor={category} className="sr-only">{category}</label>
-    <select id={category}>
-
-      {dropdowns[category].map(choice => {
-
-
-        <option value={choice}>{choice}</option>
-      })}
-
-    </select>
-  </>);
+  return (
+    <>
+      <label htmlFor={category}>{category}: </label>
+      <select id={category}> {options} </select>
+      <br />
+    </>
+  );
 }
+
 export { dropdowns, generateDropdown };

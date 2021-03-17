@@ -2,8 +2,6 @@
 import './styles/App.scss';
 // hooks
 import { useState, useEffect } from 'react';
-// data
-import tvShow from './data/tvShow';
 // firebase
 import firebase from './firebase-config';
 import { dbref, pathref } from './firebase-config';

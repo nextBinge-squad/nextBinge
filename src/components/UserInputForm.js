@@ -1,28 +1,28 @@
 // API data will be called based on user's desired TV series based on name or other criteria such as genre, network etc.
 // Form below will capture that user request, make the API call and return results on the page via a container.
 
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import dropdowns from '../data/tvShowDropdowns';
+import { dropdowns, generateDropdown } from '../data/tvShowDropdowns';
 
 function UserInputForm({ setShowResults }) {
 
   const [textInput, setTextInput] = useState('');
 
-  const [filters, setFilters] = useState({
-    language: 'English',
-    genre: 'Any',
-  });
+  // const [filters, setFilters] = useState({
+  //   language: 'English',
+  //   genre: 'Any',
+  // });
 
-  const genreOptions = [
-    'Any',
-    'Comedy',
-    'Adventure',
-    'Action',
-    'Thriller',
-    'Sci-Fi',
-  ];
+  const [filters, setFilters] = useReducer(
+
+    // reducer function: sets filters[key] to value
+    (filters, { key, value }) => ({ ...filters, [key]: value }),
+
+    // initial state
+    {}
+  );
 
   // Total number of pages available at TVmaze API "shows" endpoint.
   const TOTAL_PAGES = 217;
@@ -116,6 +116,8 @@ function UserInputForm({ setShowResults }) {
     });
   };
 
+  const categories = Object.keys(dropdowns);
+
   return (
     <>
       {/* "search by name" inputs */}
@@ -161,20 +163,8 @@ function UserInputForm({ setShowResults }) {
           randomShows();
         }}
       >
-        {/* possible spot for drop down criteria such as network, review rating */}
 
-        <label htmlFor="genre">Select a Genre (Optional): </label>
-        <select
-          id="genre"
-          value={filters.genre}
-          onChange={(event) =>
-            setFilters({ ...filters, genre: event.target.value })
-          }
-        >
-          {genreOptions.map(genre => (
-            <option value={genre}>{genre}</option>
-          ))}
-        </select>
+        {categories.map(category => generateDropdown(category))}
 
         <label htmlFor="randomize" className="sr-only">
           Press for random TV shows:
