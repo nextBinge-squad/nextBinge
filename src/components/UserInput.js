@@ -5,14 +5,14 @@ import { useState, useReducer } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import DynamicDropdown, { categories } from './DynamicDropdown';
-import BingeList from './BingeList';
+import SearchResults from './SearchResults';
 import keyCompare from '../data/dropdowns/keyCompare';
 
 function UserInput() {
 
-  const [showResults, setShowResults] = useState([]);
+  const [shows, setShows] = useState([]);
 
-  const [textInput, setTextInput] = useState('');
+  const [searchInput, setSearchInput] = useState('');
 
   // const [filters, setFilters] = useState({
   //   language: 'English',
@@ -52,7 +52,7 @@ function UserInput() {
         q: name,
       },
     }).then(({ data }) =>
-      setShowResults(data.map(({ show }) => show))
+      setShows(data.map(({ show }) => show))
     ).catch((error) => {
       Swal.fire(tvAlert);
     });
@@ -96,7 +96,7 @@ function UserInput() {
 
           console.log(showData);
 
-          setShowResults(
+          setShows(
             showData
               .filter(show => {
                 for (let key in filters) {
@@ -126,8 +126,8 @@ function UserInput() {
           className="search"
           onSubmit={(event) => {
             event.preventDefault();
-            searchShows(textInput)
-            setTextInput('');
+            searchShows(searchInput)
+            setSearchInput('');
           }}
         >
 
@@ -138,8 +138,8 @@ function UserInput() {
             id="searchField"
             className="searchField"
             placeholder="Search..."
-            value={textInput}
-            onChange={(event) => setTextInput(event.target.value)}
+            value={searchInput}
+            onChange={(event) => setSearchInput(event.target.value)}
           />
 
           {/* Buttons could go here so that user can submit their search query. Additional buttons could be added for randomize. */}
@@ -176,22 +176,24 @@ function UserInput() {
           />
         )}
 
-          <label htmlFor="randomize" className="sr-only">
-            Press for random TV shows:
+        <label htmlFor="randomize" className="sr-only">
+          Press for random TV shows:
           </label>
 
-          <button
-            type="submit"
-            id="randomize"
-          >
-            Randomize!
+        <button
+          type="submit"
+          id="randomize"
+        >
+          Randomize!
           </button>
-        </form>
+      </form>
 
       {/* Display search results as a BingeList */}
       <div className="allResults">
-        {showResults ?
-          <BingeList tvShows={showResults} /> :
+        {shows ?
+          <SearchResults
+            shows={shows}
+          /> :
           <h3>Working...</h3>
         }
       </div>

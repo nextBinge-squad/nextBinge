@@ -4,10 +4,6 @@ import './styles/App.scss';
 import { useState, useEffect } from 'react';
 // firebase
 import firebase, { dbref, pathref } from './firebase-config';
-
-// React router dom
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
 // components
 import UserInput from './components/UserInput';
 import TVCard from './components/TVCard';
@@ -27,11 +23,19 @@ import {
 
 function App() {
 
+  const [bingelists, setBingelists] = useState({});
+
   useEffect(() => {
-    dbref.on('value', data => {
+    pathref('lists').on('value', data => {
+      setBingelists(data.val());
       console.log(data.val());
     })
   }, []);
+
+  const listkeys = [];
+  // Object.keys(bingelists);
+
+  console.log('listkeys', listkeys);
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
@@ -42,8 +46,11 @@ function App() {
 
         <UserInput />
 
-        <Route path="/TVCardSmall" exact component={TVCardSmall} />
-        <Route path="/TVCardSmall/TVCardBig" exact component={TVCardBig} />
+        <Route path="/TVCardSmall" exact component={TVCard} />
+        <Route path="/TVCardSmall/TVCardBig" exact component={TVInfoPage} />
+        <main>
+
+        </main>
 
         <footer>
           <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal & Lawrence Lee</p>
@@ -54,3 +61,16 @@ function App() {
 }
 
 export default App;
+/*
+{listkeys.map(key => {
+  console.log(bingelists[key]);
+  const { name, shows } = bingelists[key];
+  return (
+    <BingeList
+      name={name}
+      shows={shows}
+      firebaseID={key}
+    />
+  );
+})}
+*/
