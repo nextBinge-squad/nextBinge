@@ -7,9 +7,11 @@ footer {
     a {
       text-decoration: none;
       color: $baby-blue;
+      transition-duration: 0.5s;
     }
 
-    a:hover {
+    a:hover,
+    a:focus {
       color: $cherry-red;
     }
   }

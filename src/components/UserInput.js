@@ -147,13 +147,12 @@ function UserInput() {
           <label htmlFor="submit" className="sr-only">
             Press to search TV shows:
           </label>
-
           <button
             type="submit"
             id="submit"
           >
             &#x1F50E;
-        </button>
+          </button>
         </form>
       </div>
 
@@ -181,6 +180,7 @@ function UserInput() {
           </label>
 
           <button
+            className="randomizeButton"
             type="submit"
             id="randomize"
           >
