@@ -1,16 +1,10 @@
-import { useReducer, useState } from "react";
 import { pathref } from "../firebase-config";
 import TVCard from "./TVCard";
 
-/* 
-params:
-- shows: an array of tv show objects
-*/
+// shows: an array of tv show objects
 function SearchResults({ shows }) {
 
   return (<>
-    <h3>Search Results</h3>
-
     <ul className="SearchResults">
 
       {shows ? shows.map(show =>
@@ -25,4 +19,3 @@ function SearchResults({ shows }) {
 }
 
 export default SearchResults;
-// remove={() => removeShows(show.id)}

@@ -1,7 +1,7 @@
 // sass
 import './styles/App.scss';
 // hooks
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 // firebase
 import firebase, { dbref, pathref } from './firebase-config';
 // components
@@ -21,14 +21,71 @@ import {
   Link
 } from 'react-router-dom';
 
+const addLists = (...lists) => {
+  lists.forEach((list) => pathref('lists').push(list));
+}
+
 function App() {
 
-  const [bingelists, setBingelists] = useState({});
+  // modifyLists is intentionally generic to support many operations
+  const [lists, modifyLists] = useReducer(
+    (state, action) => action(state),
+    {}
+  );
+
+  // update a list
+  // params: 
+  // - id: id of list being updated
+  // - update: a callback called on the list, as in update(list)
+  const updateList = (id, update) =>
+    modifyLists((lists) => ({
+      ...lists,
+      [id]: update(lists[id]),
+    }));
+  //  set lists (firebase)
+
+  // const addShow = (listID, show) =>
+  //   updateList(listID, (list) =>
+  //     list.some(show2 => show.id === show2.id)
+  //       ? list
+  //       : list.concat(show)
+  //   );
+
+  const addShow = (id, show) => {
+    const list = lists[id];
+    if (list.some(show2 => show.id === show2.id)) {
+      console.log('ERROR: more than 1 show with same id');
+      console.log('list:', list);
+      console.log('show:', show);
+    } else {
+      modifyLists(lists => ({
+        ...lists,
+        [id]: list.concat(show)
+      }))
+    }
+  };
+
+  const removeShow = (id, show) => {
+    const list = lists[id];
+    const index = list.findIndex(
+      target => target.id === show.id
+    );
+    if (index === -1) {
+      console.log('ERROR: failed to find show to delete');
+      console.log('list:', list);
+      console.log('show:', show);
+    } else {
+      list.splice(index, 1);
+      modifyLists(lists => ({
+        ...lists,
+        [id]: list
+      }));
+    }
+  };
 
   useEffect(() => {
     pathref('lists').on('value', data => {
-      setBingelists(data.val());
-      console.log(data.val());
+
     })
   }, []);
 
