@@ -94,7 +94,7 @@ function UserInput() {
         // when this is the last loop then enter this statement
         if (page === endPage) {
 
-          console.log(showData);
+          // console.log(showData);
 
           setShowResults(
             showData
@@ -187,6 +187,118 @@ function UserInput() {
             Randomize!
           </button>
         </form>
+
+          {/* Mock HTML Starts here */}
+
+
+        <div className="allLists">
+          <div className="list1">
+          <h2>Blades</h2>
+            <ul>
+              <li>
+                <img src={"https://static.tvmaze.com/uploads/images/medium_portrait/3/9153.jpg"} alt={"Poster of Blade: The Series"} />
+                <div className="listText">
+                  <p>Blade: The Series</p>
+                  <p>⭐️ 7</p>
+                </div>
+              </li>
+              <li>
+                <img src={"https://static.tvmaze.com/uploads/images/medium_portrait/3/9153.jpg"} alt={"Poster of Blade: The Series"} />
+                <div className="listText">
+                  <p>Blade: The Series</p>
+                  <p>⭐️ 7</p>
+                </div>
+              </li>
+              <li>
+                <img src={"https://static.tvmaze.com/uploads/images/medium_portrait/3/9153.jpg"} alt={"Poster of Blade: The Series"} />
+                <div className="listText">
+                  <p>Blade: The Series</p>
+                  <p>⭐️ 7</p>
+                </div>
+              </li>
+              <li>
+                <img src={"https://static.tvmaze.com/uploads/images/medium_portrait/3/9153.jpg"} alt={"Poster of Blade: The Series"} />
+                <div className="listText">
+                  <p>Blade: The Series</p>
+                  <p>⭐️ 7</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className="list2">
+            <h2>Blades</h2>
+          <ul>
+              <li>
+                <img src={"https://static.tvmaze.com/uploads/images/medium_portrait/3/9153.jpg"} alt={"Poster of Blade: The Series"} />
+                <div className="listText">
+                  <p>Blade: The Series</p>
+                  <p>⭐️ 7</p>
+                </div>
+              </li>
+              <li>
+                <img src={"https://static.tvmaze.com/uploads/images/medium_portrait/3/9153.jpg"} alt={"Poster of Blade: The Series"} />
+                <div className="listText">
+                  <p>Blade: The Series</p>
+                  <p>⭐️ 7</p>
+                </div>
+              </li>
+              <li>
+                <img src={"https://static.tvmaze.com/uploads/images/medium_portrait/3/9153.jpg"} alt={"Poster of Blade: The Series"} />
+                <div className="listText">
+                  <p>Blade: The Series</p>
+                  <p>⭐️ 7</p>
+                </div>
+              </li>
+              <li>
+                <img src={"https://static.tvmaze.com/uploads/images/medium_portrait/3/9153.jpg"} alt={"Poster of Blade: The Series"} />
+                <div className="listText">
+                  <p>Blade: The Series</p>
+                  <p>⭐️ 7</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className="list3">
+          <h2>Blades</h2>
+          <ul>
+              <li>
+                <img src={"https://static.tvmaze.com/uploads/images/medium_portrait/3/9153.jpg"} alt={"Poster of Blade: The Series"} />
+                <div className="listText">
+                  <p>Blade: The Series</p>
+                  <p>⭐️ 7</p>
+                </div>
+              </li>
+              <li>
+                <img src={"https://static.tvmaze.com/uploads/images/medium_portrait/3/9153.jpg"} alt={"Poster of Blade: The Series"} />
+                <div className="listText">
+                  <p>Blade: The Series</p>
+                  <p>⭐️ 7</p>
+                </div>
+              </li>
+              <li>
+                <img src={"https://static.tvmaze.com/uploads/images/medium_portrait/3/9153.jpg"} alt={"Poster of Blade: The Series"} />
+                <div className="listText">
+                  <p>Blade: The Series</p>
+                  <p>⭐️ 7</p>
+                </div>
+              </li>
+              <li>
+                <img src={"https://static.tvmaze.com/uploads/images/medium_portrait/3/9153.jpg"} alt={"Poster of Blade: The Series"} />
+                <div className="listText">
+                  <p>Blade: The Series</p>
+                  <p>⭐️ 7</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div className="addList">
+            <p>Add new list</p>
+            <p className="add">&#x2B;</p>
+          </div>
+        </div>
+
+        {/* Moch HTML Ends Here */}
 
       {/* Display search results as a BingeList */}
       <div className="allResults">

@@ -25,7 +25,7 @@ function App() {
 
   useEffect(() => {
     dbref.on('value', data => {
-      console.log(data.val());
+      // console.log(data.val());
     })
   }, []);
 
@@ -38,8 +38,8 @@ function App() {
 
         <UserInput />
 
-        <Route path="/TVCardSmall" exact component={TVCardSmall} />
-        <Route path="/TVCardSmall/TVCardBig" exact component={TVCardBig} />
+        {/* <Route path="/TVShows" exact component={TVCardSmall} /> */}
+        <Route path="/:showID" exact component={TVCardBig} />
 
         <footer>
           <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal & Lawrence Lee</p>

@@ -2,39 +2,64 @@
 // Information available is the following: Name of TV series, genres, image, language, priority, summary, webChannel
 
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function TVCardBig({ tvShow }) {
+
+function TVCardBig(props) {
+
+  // console.log(props);
+  // console.log(props.match.params.showID);
   
 
-  return (
-    <>
-      {/* Back button */}
-      <Link to={'/'}><button>Back</button></Link>
+  // const [selectedShow, setSelectedShow] = useState({});
 
-      {/* Button to add tv show to list */}
-      <button>&#x2B;</button>
+  // useEffect(() => {
+
+  //   axios({
+  //     url: `http://api.tvmaze.com/shows/${props.match.params.showID}`
+
+  //   }).then((response) => {
+  //     setSelectedShow(response.data);
+      
+  //   })
+  // }, [])
+
+  
+  // const { 
+  //   name, 
+  //   image: {
+  //     medium
+  //   },
+  //   summary,
+  //   genres,
+  //   network: {
+  //     country
+  //   }
+  // } = selectedShow;
+
+  return (
+      /* Back button
+        <Link to={'/'}><button>Back</button></Link>
+
+        {/* Button to add tv show to list */
+      /* <button>&#x2B;</button> */
 
       <div className="tvShowDetails">
-        <h3>Continuum</h3>
-        <img src='https://static.tvmaze.com/uploads/images/medium_portrait/0/184.jpg' alt="poster of tv series..." />
+      {/* //   <h3>{name}</h3>
+         /* <img src={`${medium}`} alt={`Poster of ${name}`} /> */
 
-        <p>Summary: Continuum is a one-hour police drama centered on Kiera Cameron, a regular cop from 65 years in the future who finds herself trapped in present day Vancouver. She is alone, a stranger in a strange land, and has eight of the most ruthless criminals from the future, known as Liber8, loose in the city.
+        /* <p>{summary}</p> */
 
-        Lucky for Kiera, through the use of her CMR (cellular memory recall), a futuristic liquid chip technology implanted in her brain, she connects with Alec Sadler, a seventeen-year-old tech genius. When Kiera calls and Alec answers, a very unique partnership begins.
+        /* <p>{genres.map((genre, index) =>
+          <>
+            {genre}{index === genres.length - 1 ? '' : ', '}
+          </>
+        )}</p> */
 
-        Kiera's first desire is to get "home." But until she figures out a way to do that, she must survive in our time period and use all the resources available to her to track and capture the terrorists before they alter history enough to change the course of the future. After all, what's the point of going back if the future isn't the one you left?</p>
-
-        <p>Genres: Science-fiction, Drama, Crime</p>
-
-        <p>Network: Showcase</p>
-
-        <p>Country: Canada</p>
+        /* <p>{country}</p> */ }
       </div>
-
-    </>
-
-
-  )
+  );
 }
 
 export default TVCardBig;
