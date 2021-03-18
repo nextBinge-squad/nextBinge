@@ -175,7 +175,7 @@ function UserInput() {
           />
         )}
 
-          <label htmlFor="randomize" className="sr-only">
+          <label htmlFor="randomize" className="randomize sr-only">
             Press for random TV shows:
           </label>
 

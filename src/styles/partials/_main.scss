@@ -1,6 +1,7 @@
 main {
   background-color: white;
   padding: 30px 0;
+  border-radius: 30px;
 }
 
 .searchInput form,
@@ -16,6 +17,7 @@ main {
     text-decoration: none;
     border: none;
     margin-left: 20px;
+    margin-bottom: 15px;
     cursor: pointer;
     transition-duration: 0.5s;
   }
@@ -25,6 +27,16 @@ main {
     background-color: $baby-blue;
   }
 }
+
+.random {
+  margin-left: 80px;
+
+  label {
+    font-size: 1.5rem;
+  }
+}
+
+
 
 .randomizeButton {
   background-color: $navy-blue;
