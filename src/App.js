@@ -12,35 +12,49 @@ function App() {
 
   const [bingelists, setBingelists] = useState({});
 
+  const [searchResults, setSearchResults] = useState([]);
+
   useEffect(() => {
     pathref('lists').on('value', data => {
       setBingelists(data.val());
     })
   }, []);
 
-  const listkeys = Object.keys(bingelists);
+  const listkeys = bingelists && Object.keys(bingelists);
 
   return (
-      <div className="nextBinge wrapper">
-        <header>
-          <h1 className="title">nextBinge</h1>
-        </header>
+    <div className="nextBinge wrapper">
+      <header>
+        <h1 className="title">nextBinge</h1>
+      </header>
 
-        {/* <UserInput /> */}
+      <UserInput
+        searchResults={searchResults}
+        setSearchResults={setSearchResults}
+      />
 
-        <main>
-          {listkeys.map(key => 
-            <BingeList
-              bingelist={bingelists[key]}
-              key={key}
-            />
-          )}
-        </main>
+      <main>
+        {listkeys && listkeys.map(key =>
+          <BingeList
+            bingelist={bingelists[key]}
+            key={key}
+          />
+        )}
 
-        <footer>
-          <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal & Lawrence Lee</p>
-        </footer>
-      </div>
+        {searchResults &&
+          <div className="allResults">
+            <BingeList bingelist={{
+              name: "Search Results",
+              shows: searchResults
+            }} />
+          </div>
+        }
+      </main>
+
+      <footer>
+        <p>Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by Leon Baram, Sal Jaffal & Lawrence Lee</p>
+      </footer>
+    </div>
   );
 }
 

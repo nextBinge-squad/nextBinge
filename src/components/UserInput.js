@@ -8,9 +8,7 @@ import DynamicDropdown, { categories } from './DynamicDropdown';
 import BingeList from './BingeList';
 import keyCompare from '../data/dropdowns/keyCompare';
 
-function UserInput() {
-
-  const [showResults, setShowResults] = useState([]);
+function UserInput({ searchResults, setSearchResults }) {
 
   const [textInput, setTextInput] = useState('');
 
@@ -47,7 +45,7 @@ function UserInput() {
         q: name,
       },
     }).then(({ data }) =>
-      setShowResults(data.map(({ show }) => show))
+      setSearchResults(data.map(({ show }) => show))
     ).catch((error) => {
       Swal.fire(tvAlert);
     });
@@ -89,7 +87,7 @@ function UserInput() {
         // when this is the last loop then enter this statement
         if (page === endPage) {
 
-          setShowResults(
+          setSearchResults(
             showData
               .filter(show => {
                 for (let key in filters) {
@@ -168,26 +166,18 @@ function UserInput() {
           />
         )}
 
-          <label htmlFor="randomize" className="randomize sr-only">
-            Press for random TV shows:
+        <label htmlFor="randomize" className="randomize sr-only">
+          Press for random TV shows:
           </label>
 
-          <button
-            className="randomizeButton"
-            type="submit"
-            id="randomize"
-          >
-            Randomize!
+        <button
+          className="randomizeButton"
+          type="submit"
+          id="randomize"
+        >
+          Randomize!
           </button>
-        </form>
-
-      {/* Display search results as a BingeList */}
-      <div className="allResults">
-        {showResults ?
-          <BingeList tvShows={showResults} /> :
-          <h3>Working...</h3>
-        }
-      </div>
+      </form>
     </main>
   )
 }
