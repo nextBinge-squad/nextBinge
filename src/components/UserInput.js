@@ -74,7 +74,7 @@ function UserInput({ searchResults, setSearchResults }) {
 
     for (let page = startPage + 1; page <= endPage; page++) {
       axios({
-        url: 'http://api.tvmaze.com/shows',
+        url: 'https://api.tvmaze.com/shows',
         params: {
           page: page,
         }
