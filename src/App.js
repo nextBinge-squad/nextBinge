@@ -36,17 +36,25 @@ function App() {
       <main>
         {listkeys && listkeys.map(key =>
           <BingeList
+            searchResults={false}
             bingelist={bingelists[key]}
             key={key}
+            bingelists={bingelists}
+            setBingelists={setBingelists}
           />
         )}
 
         {searchResults &&
           <div className="allResults">
-            <BingeList bingelist={{
-              name: "Search Results",
-              shows: searchResults
-            }} />
+            <BingeList
+            searchResults={true}
+              bingelist={{
+                name: "Search Results",
+                shows: searchResults
+              }}
+              bingelists={bingelists}
+              setBingelists={setBingelists}
+            />
           </div>
         }
       </main>
