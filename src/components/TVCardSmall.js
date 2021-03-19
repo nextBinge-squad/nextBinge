@@ -24,17 +24,14 @@ function TVCardSmall({
       }
 
       <div className="tvShow">
-        <p>{tvShow.name}</p>
+        <h3>{tvShow.name}</h3>
 
         {tvShow.genres && <p>Genre(s): {tvShow.genres.join(', ')}</p>}
 
-        {tvShow.rating && <p>rating: {tvShow.rating.average}</p>}
-        
-        <p>ID: {tvShow.id}</p>
+        {tvShow.rating && <p>{("⭐️").repeat(tvShow.rating.average)}</p>}
 
         {parent === 'SearchResults' && <>
           <button
-            className="addList"
             onClick={() => setDropdownVisible(!dropdownVisible)}
           >
             add
@@ -59,15 +56,33 @@ function TVCardSmall({
             </button>
           </>}
         </>}
-      {parent === 'BingeList' &&
-        <button
-          className="addList"
-          onClick={remove}
-        >
-          remove
+
+        {parent === 'BingeList' &&
+          <button
+            className="remove"
+            onClick={remove}
+          >
+            remove
           </button>
-      }
-    </div>
+        }
+
+        {/* {parent === 'BingeList' &&
+          <div className="vote">
+            <button
+              className="vote"
+            >
+              +
+          </button>
+          upvotes: {tvShow.upvotes}
+            <button
+              className="vote"
+            >
+              -
+          </button>
+          </div>
+        } */}
+
+      </div>
     </>
   )
 }

@@ -62,32 +62,36 @@ function App() {
           create new list
         </button>
 
-        {listMakerVisible && <>
-          <label htmlFor="newListName">name: </label>
-          <input type="text" id="newListName"
-            value={newListName}
-            onChange={e => setNewListName(e.target.value)}
-          />
-          <button
-            onClick={() => pathref('lists').push({
-              name: newListName,
-              shows: [defaultshow]
-            })}
-          >
-            confirm
+        {listMakerVisible &&
+          <div className="addList">
+            <label htmlFor="newListName">name: </label>
+            <input type="text" id="newListName"
+              value={newListName}
+              onChange={e => setNewListName(e.target.value)}
+            />
+            <button
+              onClick={() => pathref('lists').push({
+                name: newListName,
+                shows: [defaultshow]
+              })}
+            >
+              confirm
           </button>
-        </>}
+          </div>
+        }
 
-        {listkeys && listkeys.map(key =>
-          <BingeList
-            searchResults={false}
-            bingelist={bingelists[key]}
-            bingelists={bingelists}
-            updateList={updateList}
-            key={key}
-            listID={key}
-          />
-        )}
+        <div className="allLists">
+          {listkeys && listkeys.map(key =>
+            <BingeList
+              searchResults={false}
+              bingelist={bingelists[key]}
+              bingelists={bingelists}
+              updateList={updateList}
+              key={key}
+              listID={key}
+            />
+          )}
+        </div>
 
         {searchResults &&
           <div className="allResults">
