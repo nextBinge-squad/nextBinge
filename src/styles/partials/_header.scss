@@ -5,15 +5,13 @@ body {
 header {
   background-color: $navy-blue;
   margin: 0;
-  
-  a {
-    text-decoration: none;
-    .title{
-      font-weight: 400;
-      font-size: 6.4rem;
-      color: white;
-      text-align: center;
-    }
+  text-decoration: none;
+
+  .title{
+    font-weight: 400;
+    font-size: 6.4rem;
+    color: white;
+    text-align: center;
   }
 }
 

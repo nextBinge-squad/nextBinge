@@ -25,7 +25,7 @@ function App() {
   return (
       <div className="nextBinge wrapper">
         <header>
-         <h1 className="title">nextBinge</h1>
+          <h1 className="title">nextBinge</h1>
         </header>
 
         <UserInput />
