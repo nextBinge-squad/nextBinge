@@ -1,15 +1,9 @@
-
-import { Link } from 'react-router-dom';
-
 function TVCardSmall({ tvShow }) {
 
   return (
     <>
       
-
-      <Link to={'/TVCardSmall/TVCardBig'}>
           <img src={tvShow.image.medium} alt={`Poster of ${tvShow.name}...`} />
-      </Link>
 
       {/* displays TV Show name and image for small search results */}
       <div className="tvShow">
