@@ -7,12 +7,18 @@ import { pathref } from './firebase-config';
 // components
 import UserInput from './components/UserInput';
 import BingeList from './components/BingeList';
+// data
+import defaultshow from './data/defaultshow';
 
 function App() {
 
   const [bingelists, setBingelists] = useState({});
 
   const [searchResults, setSearchResults] = useState([]);
+
+  const [listMakerVisible, setlistMakerVisible] = useState(false);
+
+  const [newListName, setNewListName] = useState('');
 
   // 1. sorts list to ensure order
   // 2. calls setBingelists
@@ -23,8 +29,8 @@ function App() {
     //   ...bingelists,
     //   [key]: newList
     // });
-    // console.log('new list:', newList);
-    pathref('lists').update({ ['/'+key]: newList });
+    console.log('new list:', newList);
+    pathref('lists').update({ ['/' + key]: newList });
   };
 
   useEffect(() => {
@@ -47,12 +53,39 @@ function App() {
       />
 
       <main>
+
+        <button
+          onClick={() =>
+            setlistMakerVisible(!listMakerVisible)
+          }
+        >
+          create new list
+        </button>
+
+        {listMakerVisible && <>
+          <label htmlFor="newListName">name: </label>
+          <input type="text" id="newListName"
+            value={newListName}
+            onChange={e => setNewListName(e.target.value)}
+          />
+          <button
+            onClick={() => pathref('lists').push({
+              name: newListName,
+              shows: [defaultshow]
+            })}
+          >
+            confirm
+          </button>
+        </>}
+
         {listkeys && listkeys.map(key =>
           <BingeList
             searchResults={false}
             bingelist={bingelists[key]}
             bingelists={bingelists}
-            updateList={(newList) => updateList(key, newList)}
+            updateList={updateList}
+            key={key}
+            listID={key}
           />
         )}
 
@@ -65,7 +98,7 @@ function App() {
                 shows: searchResults
               }}
               bingelists={bingelists}
-              updateList={(key, newList) => updateList(key, newList)}
+              updateList={updateList}
             />
           </div>
         }

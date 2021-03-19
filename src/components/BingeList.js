@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { pathref } from "../firebase-config";
 import TVCardSmall from "./TVCardSmall";
 
@@ -6,10 +7,8 @@ function BingeList({
   bingelist,
   bingelists,
   updateList,
+  listID
 }) {
-
-  console.log(bingelist.name);
-  console.log(bingelist.shows.map(({id})=>id).join(', '));
 
   return (<>
 
@@ -23,8 +22,10 @@ function BingeList({
             bingelists={bingelists}
             parent={searchResults ? 'SearchResults' : 'BingeList'}
             remove={() => {
-              bingelist.shows.splice(index, 1);
-              updateList(bingelist);
+              if (bingelist.shows.length > 1) {
+                bingelist.shows.splice(index, 1);
+                updateList(listID, bingelist);
+              }
             }}
 
             addTo={(key) => {
@@ -41,8 +42,6 @@ function BingeList({
           />
         </li>)}
     </ul>
-
-    <button onClick={() => pathref('lists').push(bingelist)}>pushma</button>
   </>);
 }
 
