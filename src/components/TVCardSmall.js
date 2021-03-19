@@ -1,34 +1,88 @@
-function TVCardSmall({ tvShow }) {
+import { useState } from "react";
+
+function TVCardSmall({
+  tvShow,
+  bingelists,
+  parent,
+  remove,
+  addTo
+}) {
+
+  const listkeys = Object.keys(bingelists);
+
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [targetListID, setTargetListID] = useState(listkeys[0]);
 
   return (
     <>
-      
-          <img src={tvShow.image.medium} alt={`Poster of ${tvShow.name}...`} />
 
-      {/* displays TV Show name and image for small search results */}
+      {tvShow.image &&
+        <img
+          src={tvShow.image.medium}
+          alt={`Poster of tv show ${tvShow.name}...`}
+        />
+      }
+
       <div className="tvShow">
-        <p>{tvShow.name}</p>
-        <p>{tvShow.genres.map((genre, index) =>
-          <>
-            {genre}{index === tvShow.genres.length - 1 ? '' : ', '}
-          </>
-        )}</p>
+        <h3>{tvShow.name}</h3>
 
-        {/* displays tv show priority */}
-        <p>rating: {tvShow.rating.average}</p>
-        <p>{tvShow.id}</p>
+        {tvShow.genres && <p>Genre(s): {tvShow.genres.join(', ')}</p>}
 
-        {/* Button to add tv show to list */}
-        <button className="addList">&#x2B;</button>
+        {tvShow.rating && <p>{("⭐️").repeat(tvShow.rating.average)}</p>}
+
+        {parent === 'SearchResults' && <>
+          <button
+            onClick={() => setDropdownVisible(!dropdownVisible)}
+          >
+            add
+          </button>
+
+          {dropdownVisible && <>
+            <select
+              value={targetListID}
+              onChange={e => setTargetListID(e.target.value)}
+            >
+              {listkeys.map(key =>
+                <option value={key}>{bingelists[key].name}</option>
+              )}
+            </select>
+
+            <button
+              onClick={() => {
+                addTo(targetListID);
+              }}
+            >
+              confirm
+            </button>
+          </>}
+        </>}
+
+        {parent === 'BingeList' &&
+          <button
+            className="remove"
+            onClick={remove}
+          >
+            remove
+          </button>
+        }
+
+        {/* {parent === 'BingeList' &&
+          <div className="vote">
+            <button
+              className="vote"
+            >
+              +
+          </button>
+          upvotes: {tvShow.upvotes}
+            <button
+              className="vote"
+            >
+              -
+          </button>
+          </div>
+        } */}
+
       </div>
-
-     
-
-      
-
-
-      {/* Calling information for TV series to be displayed using TV Card Big Component that will provide additional information for the user after the search result has been loaded */}
-      {/* <TVCardBig /> */}
     </>
   )
 }
