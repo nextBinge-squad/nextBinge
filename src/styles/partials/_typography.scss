@@ -5,12 +5,8 @@ $ubuntu: 'Ubuntu', sans-serif;
 
 html {
   font-size: 62.5%;
-  font-family: $ubuntu;
 }
 
-
-
-footer p {
-  font-weight: 300;
-  font-size: 1.5rem;
+body {
+  font-family: $ubuntu;
 }
