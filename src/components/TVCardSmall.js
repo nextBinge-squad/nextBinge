@@ -3,14 +3,15 @@ import { useState } from "react";
 function TVCardSmall({
   tvShow,
   bingelists,
-  setBingelists,
-  parent
+  parent,
+  remove,
+  addTo
 }) {
 
-  const listkeys = Object.keys(bingelists) || [];
+  const listkeys = Object.keys(bingelists);
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [targetListID, setTargetListID] = useState('');
+  const [targetListID, setTargetListID] = useState(listkeys[0]);
 
   return (
     <>
@@ -28,7 +29,8 @@ function TVCardSmall({
         {tvShow.genres && <p>Genre(s): {tvShow.genres.join(', ')}</p>}
 
         {tvShow.rating && <p>rating: {tvShow.rating.average}</p>}
-        <p>{tvShow.id}</p>
+        
+        <p>ID: {tvShow.id}</p>
 
         {parent === 'SearchResults' && <>
           <button
@@ -50,30 +52,22 @@ function TVCardSmall({
 
             <button
               onClick={() => {
-                const targetList = bingelists[targetListID];
-                if (!targetList.shows.some(
-                  ({ id }) => tvShow.id === id
-                )) {
-                  targetList.shows.push(tvShow);
-                }
-                setBingelists({
-                  ...bingelists,
-                  [targetListID]: targetList
-                });
+                addTo(targetListID);
               }}
             >
               confirm
             </button>
           </>}
         </>}
-        {parent === 'BingeList' &&
-          <button
-            className="addList"
-          >
-            remove
+      {parent === 'BingeList' &&
+        <button
+          className="addList"
+          onClick={remove}
+        >
+          remove
           </button>
-        }
-      </div>
+      }
+    </div>
     </>
   )
 }

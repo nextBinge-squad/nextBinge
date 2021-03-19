@@ -14,6 +14,19 @@ function App() {
 
   const [searchResults, setSearchResults] = useState([]);
 
+  // 1. sorts list to ensure order
+  // 2. calls setBingelists
+  // 3. updates firebase
+  const updateList = (key, newList) => {
+    newList.shows.sort((a, b) => b.upvotes - a.upvotes);
+    // setBingelists({
+    //   ...bingelists,
+    //   [key]: newList
+    // });
+    // console.log('new list:', newList);
+    pathref('lists').update({ ['/'+key]: newList });
+  };
+
   useEffect(() => {
     pathref('lists').on('value', data => {
       setBingelists(data.val());
@@ -38,22 +51,21 @@ function App() {
           <BingeList
             searchResults={false}
             bingelist={bingelists[key]}
-            key={key}
             bingelists={bingelists}
-            setBingelists={setBingelists}
+            updateList={(newList) => updateList(key, newList)}
           />
         )}
 
         {searchResults &&
           <div className="allResults">
             <BingeList
-            searchResults={true}
+              searchResults={true}
               bingelist={{
                 name: "Search Results",
                 shows: searchResults
               }}
               bingelists={bingelists}
-              setBingelists={setBingelists}
+              updateList={(key, newList) => updateList(key, newList)}
             />
           </div>
         }
