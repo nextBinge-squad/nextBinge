@@ -1,11 +1,10 @@
-
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 function TVCardSmall({ tvShow }) {
 
   return (
-    <>
-      
+    <React.Fragment key={tvShow.id}>
 
       <Link to={'/TVCardSmall/TVCardBig'}>
           <img src={tvShow.image.medium} alt={`Poster of ${tvShow.name}...`} />
@@ -35,7 +34,7 @@ function TVCardSmall({ tvShow }) {
 
       {/* Calling information for TV series to be displayed using TV Card Big Component that will provide additional information for the user after the search result has been loaded */}
       {/* <TVCardBig /> */}
-    </>
+    </React.Fragment>
   )
 }
 
