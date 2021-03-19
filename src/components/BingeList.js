@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { pathref } from "../firebase-config";
 import TVCardSmall from "./TVCardSmall";
 
 function BingeList({

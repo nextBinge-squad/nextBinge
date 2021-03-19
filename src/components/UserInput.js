@@ -5,7 +5,6 @@ import { useState, useReducer } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import DynamicDropdown, { categories } from './DynamicDropdown';
-import BingeList from './BingeList';
 import keyCompare from '../data/dropdowns/keyCompare';
 
 function UserInput({ searchResults, setSearchResults }) {
@@ -55,7 +54,7 @@ function UserInput({ searchResults, setSearchResults }) {
   // Saves results to showResults in App.js.
   const randomShows = () => {
 
-    const randomPage = getRandomNumber(TOTAL_PAGES);
+    // const randomPage = getRandomNumber(TOTAL_PAGES);
 
     let additionalPages = 0;
 
