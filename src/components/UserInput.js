@@ -14,11 +14,6 @@ function UserInput() {
 
   const [textInput, setTextInput] = useState('');
 
-  // const [filters, setFilters] = useState({
-  //   language: 'English',
-  //   genre: 'Any',
-  // });
-
   const [filters, setFilters] = useReducer(
 
     // reducer function: sets filters[key] to value
@@ -93,8 +88,6 @@ function UserInput() {
 
         // when this is the last loop then enter this statement
         if (page === endPage) {
-
-          console.log(showData);
 
           setShowResults(
             showData

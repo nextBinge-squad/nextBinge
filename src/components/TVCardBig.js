@@ -8,10 +8,6 @@ function TVCardBig({ tvShow }) {
 
   return (
     <>
-      {/* Back button */}
-      <Link to={'/'}><button>Back</button></Link>
-
-      {/* Button to add tv show to list */}
       <button>&#x2B;</button>
 
       <div className="tvShowDetails">
