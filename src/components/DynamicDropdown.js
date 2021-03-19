@@ -10,11 +10,14 @@ const DEFAULT_OPTION = "";
  * @param {array} choices an array of strings
  * @returns an array of JSX <option> literals based on options[]
  */
-const generateOptions = choices =>
-  choices.map(
-    (choice, i) => <option value={choice} key={i}> {choice} </option>
-  );
+const generateOptions = (choices, vals=undefined) => {
 
+  if (!vals) vals = choices;
+
+  return choices.map(
+    (choice, i) => <option value={vals[i]} key={i}> {choice} </option>
+  );
+}
 /**
  * Component
  * renders a controlled input dropdown based on a category
@@ -88,4 +91,4 @@ function DynamicDropdown({ category, state, setState }) {
 };
 
 export default DynamicDropdown;
-export { categories };
+export { categories, generateOptions };

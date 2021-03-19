@@ -1,10 +1,4 @@
-import { useReducer, useState } from "react";
-import { pathref } from "../firebase-config";
 import TVCard from "./TVCard";
-
-// define a sorting criterion: compare two shows' upvote count
-const compareShows = (showA, showB) =>
-  showB.upvotes - showA.upvotes;
 
 /* 
 params:
@@ -14,8 +8,10 @@ params:
 */
 function BingeList({
   name,
+  setName,
   shows,
-  id
+  removeShow,
+  setUpvotes,
 }) {
 
   return (<>
@@ -23,16 +19,20 @@ function BingeList({
       <input
         type="text"
         value={name}
+        onChange={(e) => setName(e.target.value)}
       />
     </h3>
     <ul className="BingeList">
-      {shows ? shows.map(show =>
+      {shows.map((show, index) =>
         <li className="tvShow" key={show.id}>
           <TVCard
             show={show}
+            setUpvotes={(upvotes) => setUpvotes(index, upvotes)}
+            removeSelf={() => removeShow(index)}
+            parent={"BingeList"}
           />
         </li>
-      ) : <p>add a show</p>}
+      )}
     </ul>
   </>);
 }

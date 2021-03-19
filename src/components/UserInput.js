@@ -5,19 +5,11 @@ import { useState, useReducer } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import DynamicDropdown, { categories } from './DynamicDropdown';
-import SearchResults from './SearchResults';
 import keyCompare from '../data/dropdowns/keyCompare';
 
-function UserInput() {
-
-  const [shows, setShows] = useState([]);
+function UserInput({ setSearchResults }) {
 
   const [searchInput, setSearchInput] = useState('');
-
-  // const [filters, setFilters] = useState({
-  //   language: 'English',
-  //   genre: 'Any',
-  // });
 
   const [filters, setFilters] = useReducer(
 
@@ -52,7 +44,7 @@ function UserInput() {
         q: name,
       },
     }).then(({ data }) =>
-      setShows(data.map(({ show }) => show))
+      setSearchResults(data.map(({ show }) => show))
     ).catch((error) => {
       Swal.fire(tvAlert);
     });
@@ -96,7 +88,7 @@ function UserInput() {
 
           console.log(showData);
 
-          setShows(
+          setSearchResults(
             showData
               .filter(show => {
                 for (let key in filters) {
@@ -188,15 +180,6 @@ function UserInput() {
           </button>
       </form>
 
-      {/* Display search results as a BingeList */}
-      <div className="allResults">
-        {shows ?
-          <SearchResults
-            shows={shows}
-          /> :
-          <h3>Working...</h3>
-        }
-      </div>
     </main>
   )
 }

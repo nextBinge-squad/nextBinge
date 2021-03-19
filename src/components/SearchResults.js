@@ -2,7 +2,11 @@ import { pathref } from "../firebase-config";
 import TVCard from "./TVCard";
 
 // shows: an array of tv show objects
-function SearchResults({ shows }) {
+function SearchResults({
+  shows,
+  addShow,
+  bingelists
+}) {
 
   return (<>
     <ul className="SearchResults">
@@ -11,6 +15,9 @@ function SearchResults({ shows }) {
         <li className="tvShow" key={show.id}>
           <TVCard
             show={show}
+            addSelf={(id) => addShow(id, show)}
+            bingelists={bingelists}
+            parent={"SearchResults"}
           />
         </li>
       ) : <p>add a show</p>}

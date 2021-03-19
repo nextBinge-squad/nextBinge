@@ -1,48 +1,99 @@
-
+import { useState } from 'react';
 import TVInfoPage from './TVInfoPage';
-// React router dom
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { generateOptions } from './DynamicDropdown';
 
-function TVCard({ show }) {
+function TVCard({
+  // tv show data
+  show,
+  // name of parent component
+  parent,
+  // defined when rendered in BingeList
+  setUpvotes,
+  removeSelf,
+  // defined when rendered in SearchResults
+  addSelf,
+  bingelists
+}) {
 
-  console.log(show);
+  const listkeys = bingelists && Object.keys(bingelists);
 
-  // return (
-  //   <>
-      
+  const [showInfo, setShowInfo] = useState(false);
 
-  //     <Link to={'/TVCardSmall/TVCardBig'}>
-  //         <img src={show.image.medium} alt={`Poster of ${show.name}...`} />
-  //     </Link>
+  const [showBingelists, setShowBingelists] = useState(false);
 
-  //     {/* displays TV Show name and image for small search results */}
-  //     <div className="tvShow">
-  //       <p>{show.name}</p>
-  //       {/* <p>{tvShow.genres.map((genre, index) =>
-  //         <>
-  //           {genre}{index === tvShow.genres.length - 1 ? '' : ', '}
-  //         </>
-  //       )}</p> */}
+  const [listID, setListID] = useState('');
 
-  //       {/* displays tv show priority */}
-  //       <p>rating: {show.rating.average}</p>
-  //       <p>{show.id}</p>
+  return (
+    <>
+      <p>{show.name}</p>
 
-  //       {/* Button to add tv show to list */}
-  //       <button>&#x2B;</button>
-  //     </div>
+      {/* if inside bingelist, show upvote controls */}
+      {parent === "BingeList" && <>
+        <button
+          onClick={() => setUpvotes(++show.upvotes)}
+        >+</button>
 
-     
+        <p>upvotes: {show.upvotes}</p>
 
-      
+        <button
+          onClick={() => setUpvotes(--show.upvotes)}
+        >-</button>
+      </>}
 
+      <button
+        onClick={setShowInfo(!showInfo)}
+      >{(showInfo ? "hide" : "show more")}</button>
 
-  //     {/* Calling information for TV series to be displayed using TV Card Big Component that will provide additional information for the user after the search result has been loaded */}
-  //     {/* <TVCardBig /> */}
-  //   </>
-  // );
+      {showInfo ?
+        <TVInfoPage
+          show={show}
+        /> : <></>
+      }
 
-  return <p>{show.name}</p>
+      {/* if inside search results, show "add to list" button */}
+      {parent === "SearchResults" && <>
+
+        <button
+          onClick={() => setShowBingelists(!showBingelists)}
+        >
+          {showBingelists ? "nvm" : "add to list"}
+        </button>
+      </>}
+
+      {/* if inside bingelist, show "remove" button */}
+      {parent === "BingeList" && <>
+
+        <button
+          onClick={removeSelf}
+        >
+          remove
+        </button>
+      </>}
+
+      {/* if inside search results and "add to list" was clicked */}
+      {((parent === "SearchResults") && showBingelists) ?
+        <>
+          <label htmlFor={'bingelist' + show.id}>
+            choose list
+          </label>
+          <select
+            id={'bingelist' + show.id}
+            value={listID}
+            onChange={e => setListID(e.target.value)}
+          >
+            {generateOptions(
+              listkeys.map(key => bingelists[key].name),
+              listkeys
+            )}
+          </select>
+
+          <button
+            onClick={() => addSelf(listID)}
+          >add to list</button>
+        </> : <></>
+      }
+    </>
+  );
 }
 
 export default TVCard;

@@ -1,19 +1,17 @@
+
 // sass
 import './styles/App.scss';
 // hooks
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect } from 'react';
 // firebase
-import firebase, { dbref, pathref } from './firebase-config';
+import { pathref } from './firebase-config';
 // components
 import UserInput from './components/UserInput';
 import TVCard from './components/TVCard';
 import TVInfoPage from './components/TVInfoPage';
 import BingeList from './components/BingeList';
+import SearchResults from './components/SearchResults';
 // 3rd party
-// axios
-import axios from 'axios';
-// sweet alert
-import Swal from 'sweetalert2';
 // react router dom
 import {
   BrowserRouter as Router,
@@ -21,78 +19,79 @@ import {
   Link
 } from 'react-router-dom';
 
-const addLists = (...lists) => {
-  lists.forEach((list) => pathref('lists').push(list));
-}
+// creates a new bingelist
+const createBingelist = (...bingelists) => {
+  bingelists.forEach((bingelist) => pathref('lists').push(bingelist));
+};
 
-function App() {
+function App() {  
 
-  // modifyLists is intentionally generic to support many operations
-  const [lists, modifyLists] = useReducer(
-    (state, action) => action(state),
-    {}
-  );
+  // search results
+  const [searchResults, setSearchResults] = useState([]);
 
-  // update a list
-  // params: 
-  // - id: id of list being updated
-  // - update: a callback called on the list, as in update(list)
-  const updateList = (id, update) =>
-    modifyLists((lists) => ({
-      ...lists,
-      [id]: update(lists[id]),
-    }));
-  //  set lists (firebase)
-
-  // const addShow = (listID, show) =>
-  //   updateList(listID, (list) =>
-  //     list.some(show2 => show.id === show2.id)
-  //       ? list
-  //       : list.concat(show)
-  //   );
-
-  const addShow = (id, show) => {
-    const list = lists[id];
-    if (list.some(show2 => show.id === show2.id)) {
-      console.log('ERROR: more than 1 show with same id');
-      console.log('list:', list);
-      console.log('show:', show);
-    } else {
-      modifyLists(lists => ({
-        ...lists,
-        [id]: list.concat(show)
-      }))
-    }
-  };
-
-  const removeShow = (id, show) => {
-    const list = lists[id];
-    const index = list.findIndex(
-      target => target.id === show.id
-    );
-    if (index === -1) {
-      console.log('ERROR: failed to find show to delete');
-      console.log('list:', list);
-      console.log('show:', show);
-    } else {
-      list.splice(index, 1);
-      modifyLists(lists => ({
-        ...lists,
-        [id]: list
-      }));
-    }
-  };
+  const listsref = pathref('lists');
 
   useEffect(() => {
-    pathref('lists').on('value', data => {
-
-    })
+    listsref.on('value', (data) => {
+      // setBingelists(data.val());
+    });
   }, []);
 
-  const listkeys = [];
-  // Object.keys(bingelists);
+  // user-created lists ("bingelists")
+  const [bingelists, setBingelists] = useState({});
 
-  console.log('listkeys', listkeys);
+  // FUNCTIONS FOR MUTATING STATE
+
+  // assigns an updated bingelist to bingelists[id]
+  // updates the list in firebase
+  const updateBingelist = (id, bingelist) => {
+    setBingelists({ ...bingelists, [id]: bingelist });
+    pathref('lists').update({ [id]: bingelist });
+  };
+  // adds show to bingelist
+  const addShow = (id, show) => {
+    const bingelist = bingelists[id];
+
+    // if show is already in bingelist, log an error
+    if (bingelist.some(element => element.id === show.id)) {
+      console.log('ERROR: more than 1 show with same id');
+      console.log('list:', bingelist);
+      console.log('show:', show);
+
+      // otherwise, add the show
+    } else {
+      show.upvotes = 0;
+      bingelist.shows.splice(bingelist.shows.length, 0, show);
+      updateBingelist(id, bingelist);
+    }
+  };
+
+  // removes show from bingelist
+  const removeShow = (id, index) => {
+    const bingelist = bingelists[id];
+    bingelist.shows.splice(index, 1);
+    updateBingelist(id, bingelist);
+  };
+
+  // sets upvotes of show in bingelist
+  const setUpvotes = (id, index, upvotes) => {
+    const bingelist = bingelists[id];
+    bingelist.shows[index].upvotes = upvotes;
+    // re-sort the bingelist to ensure order
+    bingelist.shows.sort((a, b) => b.upvotes - a.upvotes);
+    updateBingelist(id, bingelist);
+  }
+
+  // set name of bingelist
+  const setName = (id, name) => {
+    const bingelist = bingelists[id];
+    bingelist.name = name;
+    updateBingelist(id, bingelist);
+  }
+
+  // END OF FUNCTIONS FOR MUTATING STATE
+
+  const listkeys = Object.keys(bingelists);
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
@@ -101,12 +100,34 @@ function App() {
           <Link to={'/'}><h1 className="title">nextBinge</h1></Link>
         </header>
 
-        <UserInput />
+        <UserInput
+          bingelists={bingelists}
+        />
 
         <Route path="/TVCardSmall" exact component={TVCard} />
         <Route path="/TVCardSmall/TVCardBig" exact component={TVInfoPage} />
         <main>
+          {listkeys.map((key) => {
 
+            const { name, shows } = bingelists[key];
+
+            return (<BingeList
+              name={name}
+              setName={(newName) => setName(key, newName)}
+              shows={shows}
+              removeShow={(index) => removeShow(key, index)}
+              setUpvotes={(index, upvotes) => setUpvotes(key, index, upvotes)}
+              key={key}
+            />);
+
+          })}
+
+          {searchResults &&
+            <SearchResults
+              shows={searchResults}
+              addShow={addShow}
+              bingelists={bingelists}
+            />}
         </main>
 
         <footer>
