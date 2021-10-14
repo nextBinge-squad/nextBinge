@@ -1,4 +1,4 @@
-import dropdowns from '../data/dropdowns/dropdowns';
+import dropdowns from "../data/dropdowns/dropdowns";
 
 const categories = Object.keys(dropdowns);
 
@@ -10,10 +10,13 @@ const DEFAULT_OPTION = "";
  * @param {array} choices an array of strings
  * @returns an array of JSX <option> literals based on options[]
  */
-const generateOptions = choices =>
-  choices.map(
-    (choice, i) => <option value={choice} key={i}> {choice} </option>
-  );
+const generateOptions = (choices) =>
+  choices.map((choice, i) => (
+    <option value={choice} key={i}>
+      {" "}
+      {choice}{" "}
+    </option>
+  ));
 
 /**
  * Component
@@ -24,17 +27,14 @@ const generateOptions = choices =>
  * @returns a controlled dropdown input (<select>) bound to state & setState
  */
 function DynamicDropdown({ category, state, setState }) {
-
   let options;
 
   // customizes dropdown render based on category
   // (several categories are special cases)
   switch (category) {
-
     // special cases: must be generated based on optgroup
     case "network":
     case "webChannel":
-
       // list of optgroup names
       const groupNames = Object.keys(dropdowns[category]);
 
@@ -49,16 +49,21 @@ function DynamicDropdown({ category, state, setState }) {
 
     // special case: option values and labels are different
     case "runtime":
-      options = dropdowns.runtime.map(
-        (opt, i) => <option value={opt.val} key={i}> {opt.str} </option>
-      );
+      options = dropdowns.runtime.map((opt, i) => (
+        <option value={opt.val} key={i}>
+          {" "}
+          {opt.str}{" "}
+        </option>
+      ));
       break;
 
     // special case: option values and labels are different
     case "rating":
-      options = dropdowns.rating.map(
-        (opt, i) => <option value={opt} key={i}>{opt}+</option>
-      );
+      options = dropdowns.rating.map((opt, i) => (
+        <option value={opt} key={i}>
+          {opt}+
+        </option>
+      ));
       break;
 
     default:
@@ -67,25 +72,32 @@ function DynamicDropdown({ category, state, setState }) {
   }
 
   // add default to beginning of each dropdown
-  options.unshift(<option value={DEFAULT_OPTION} key={-1}> {DEFAULT_OPTION} </option>);
+  options.unshift(
+    <option value={DEFAULT_OPTION} key={-1}>
+      {" "}
+      {DEFAULT_OPTION}{" "}
+    </option>
+  );
 
   return (
     <>
       <label htmlFor={category}>{category}: </label>
-      <select id={category}
-
+      <select
+        id={category}
         value={state[category]}
-        onChange={event => setState({
-          key: category,
-          value: event.target.value
-        })}
+        onChange={(event) =>
+          setState({
+            key: category,
+            value: event.target.value,
+          })
+        }
       >
         {options}
       </select>
       <br />
     </>
   );
-};
+}
 
 export default DynamicDropdown;
 export { categories };

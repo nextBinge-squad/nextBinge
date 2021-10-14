@@ -1,18 +1,16 @@
 // API data will be called based on user's desired TV series based on name or other criteria such as genre, network etc.
 // Form below will capture that user request, make the API call and return results on the page via a container.
 
-import { useState, useReducer } from 'react';
-import axios from 'axios';
-import Swal from 'sweetalert2';
-import DynamicDropdown, { categories } from './DynamicDropdown';
-import keyCompare from '../data/dropdowns/keyCompare';
+import { useState, useReducer } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+import DynamicDropdown, { categories } from "./DynamicDropdown";
+import keyCompare from "../data/dropdowns/keyCompare";
 
 function UserInput({ searchResults, setSearchResults }) {
-
-  const [textInput, setTextInput] = useState('');
+  const [textInput, setTextInput] = useState("");
 
   const [filters, setFilters] = useReducer(
-
     // reducer function: sets filters[key] to value
     (filters, { key, value }) => ({ ...filters, [key]: value }),
 
@@ -25,41 +23,39 @@ function UserInput({ searchResults, setSearchResults }) {
 
   // Alert in case an API call goes wrong. Uses Sweet Alert 2.
   const tvAlert = {
-    title: 'Error!',
-    text: 'TV show data could not be loaded at this time, please try again later!',
-    icon: 'error',
-    timer: 2000
+    title: "Error!",
+    text: "TV show data could not be loaded at this time, please try again later!",
+    icon: "error",
+    timer: 2000,
   };
 
   // Returns a random integer less than or equal to maxNumber.
-  const getRandomNumber = (maxNumber) =>
-    Math.floor(Math.random() * (maxNumber));
+  const getRandomNumber = (maxNumber) => Math.floor(Math.random() * maxNumber);
 
   // Makes a GET request to TVmaze's 'search/shows' endpoint.
   // Saves results to showResults in App.js.
   const searchShows = (name) => {
     axios({
-      url: 'https://api.tvmaze.com/search/shows',
+      url: "https://api.tvmaze.com/search/shows",
       params: {
         q: name,
       },
-    }).then(({ data }) =>
-      setSearchResults(data.map(({ show }) => show))
-    ).catch((error) => {
-      Swal.fire(tvAlert);
-    });
+    })
+      .then(({ data }) => setSearchResults(data.map(({ show }) => show)))
+      .catch((error) => {
+        Swal.fire(tvAlert);
+      });
   };
 
   // Makes a GET request to TVmaze's 'shows' endpoint.
   // Saves results to showResults in App.js.
   const randomShows = () => {
-
     // const randomPage = getRandomNumber(TOTAL_PAGES);
 
     let additionalPages = 0;
 
     for (let key in filters) {
-      if (filters[key] !== 'Any') {
+      if (filters[key] !== "Any") {
         additionalPages++;
       }
     }
@@ -71,40 +67,39 @@ function UserInput({ searchResults, setSearchResults }) {
 
     let showData = [];
 
-
     for (let page = startPage + 1; page <= endPage; page++) {
       axios({
-        url: 'https://api.tvmaze.com/shows',
+        url: "https://api.tvmaze.com/shows",
         params: {
           page: page,
-        }
-      }).then(({ data }) => {
-
-        //push the data from the first page into the array and then the second and so on
-        showData.push(...data);
-
-        // when this is the last loop then enter this statement
-        if (page === endPage) {
-
-          setSearchResults(
-            showData
-              .filter(show => {
-                for (let key in filters) {
-                  // compare show[key] to filters[key]
-                  if (!keyCompare(key, show, filters)) {
-                    // return false as soon as any comparison fails
-                    return false;
-                  }
-                }
-                // return true only if all comparisons pass
-                return true;
-              })
-              .slice(0, 10)
-          )
-        }
-      }).catch(error => {
-        return Swal.fire(tvAlert);
+        },
       })
+        .then(({ data }) => {
+          //push the data from the first page into the array and then the second and so on
+          showData.push(...data);
+
+          // when this is the last loop then enter this statement
+          if (page === endPage) {
+            setSearchResults(
+              showData
+                .filter((show) => {
+                  for (let key in filters) {
+                    // compare show[key] to filters[key]
+                    if (!keyCompare(key, show, filters)) {
+                      // return false as soon as any comparison fails
+                      return false;
+                    }
+                  }
+                  // return true only if all comparisons pass
+                  return true;
+                })
+                .slice(0, 10)
+            );
+          }
+        })
+        .catch((error) => {
+          return Swal.fire(tvAlert);
+        });
     }
   };
 
@@ -116,12 +111,13 @@ function UserInput({ searchResults, setSearchResults }) {
           className="search"
           onSubmit={(event) => {
             event.preventDefault();
-            searchShows(textInput)
-            setTextInput('');
+            searchShows(textInput);
+            setTextInput("");
           }}
         >
-
-          <label htmlFor="searchField" className="searchField sr-only">Enter the name of a TV show: </label>
+          <label htmlFor="searchField" className="searchField sr-only">
+            Enter the name of a TV show:{" "}
+          </label>
           <input
             required
             type="text"
@@ -137,10 +133,7 @@ function UserInput({ searchResults, setSearchResults }) {
           <label htmlFor="submit" className="sr-only">
             Press to search TV shows:
           </label>
-          <button
-            type="submit"
-            id="submit"
-          >
+          <button type="submit" id="submit">
             &#x1F50E;
           </button>
         </form>
@@ -154,31 +147,25 @@ function UserInput({ searchResults, setSearchResults }) {
           randomShows();
         }}
       >
-
-        {categories.map((category, i) =>
-
+        {categories.map((category, i) => (
           <DynamicDropdown
             category={category}
             state={filters}
             setState={setFilters}
             key={i}
           />
-        )}
+        ))}
 
         <label htmlFor="randomize" className="randomize sr-only">
           Press for random TV shows:
-          </label>
+        </label>
 
-        <button
-          className="randomizeButton"
-          type="submit"
-          id="randomize"
-        >
+        <button className="randomizeButton" type="submit" id="randomize">
           Randomize!
-          </button>
+        </button>
       </form>
     </main>
-  )
+  );
 }
 
 export default UserInput;

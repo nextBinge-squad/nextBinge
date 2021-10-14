@@ -5,30 +5,26 @@ function BingeList({
   bingelist,
   bingelists,
   updateList,
-  listID
+  listID,
 }) {
-
   return (
     <div className="list1">
-
       <h2>{bingelist.name}</h2>
 
       <ul className="UserList">
-        {bingelist.shows.map((show, index) =>
+        {bingelist.shows.map((show, index) => (
           <li className="tvShow" key={show.id}>
             <TVCardSmall
               tvShow={show}
               bingelists={bingelists}
-              parent={searchResults ? 'SearchResults' : 'BingeList'}
+              parent={searchResults ? "SearchResults" : "BingeList"}
               remove={() => {
                 if (bingelist.shows.length > 1) {
                   bingelist.shows.splice(index, 1);
                   updateList(listID, bingelist);
                 }
               }}
-
               addTo={(key) => {
-
                 const targetList = bingelists[key];
 
                 if (!targetList.shows.some(({ id }) => show.id === id)) {
@@ -39,7 +35,8 @@ function BingeList({
                 }
               }}
             />
-          </li>)}
+          </li>
+        ))}
       </ul>
     </div>
   );

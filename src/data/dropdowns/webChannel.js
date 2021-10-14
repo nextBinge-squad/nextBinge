@@ -257,37 +257,12 @@ const webChannel = {
     "Steambot",
     "YTV.COM",
   ],
-  Australia: [
-    "10 Play",
-    "7plus",
-    "9Now",
-    "ABC iView",
-    "FOXTEL Now",
-    "Stan",
-  ],
-  Ireland: [
-    "RTE PLAYER",
-  ],
-  "New Zealand": [
-    "ThreeNow",
-    "TVNZ kidzone",
-    "TVNZ OnDemand",
-  ],
-  Bangladesh: [
-    "Binge",
-    "Bioscope",
-    "Bongo",
-  ],
-  Belgium: [
-    "Play More",
-    "RTBF Webcréation",
-    "Streamz",
-    "VTM GO",
-  ],
-  Brazil: [
-    "FOX Premium",
-    "Globoplay",
-  ],
+  Australia: ["10 Play", "7plus", "9Now", "ABC iView", "FOXTEL Now", "Stan"],
+  Ireland: ["RTE PLAYER"],
+  "New Zealand": ["ThreeNow", "TVNZ kidzone", "TVNZ OnDemand"],
+  Bangladesh: ["Binge", "Bioscope", "Bongo"],
+  Belgium: ["Play More", "RTBF Webcréation", "Streamz", "VTM GO"],
+  Brazil: ["FOX Premium", "Globoplay"],
   China: [
     "Bilibili",
     "Blued",
@@ -304,21 +279,10 @@ const webChannel = {
     "Xuan Fun",
     "Youku",
   ],
-  "Czech Republic": [
-    "Stream.cz",
-  ],
-  Denmark: [
-    "TV2 Play",
-  ],
-  Egypt: [
-    "Watch iT!",
-  ],
-  Finland: [
-    "C More Finland",
-    "Elisa Viihde",
-    "ToonsTV",
-    "Yle Areena",
-  ],
+  "Czech Republic": ["Stream.cz"],
+  Denmark: ["TV2 Play"],
+  Egypt: ["Watch iT!"],
+  Finland: ["C More Finland", "Elisa Viihde", "ToonsTV", "Yle Areena"],
   France: [
     "Allociné",
     "ARTE.tv",
@@ -338,17 +302,9 @@ const webChannel = {
     "TVNOW",
     "ZDFmediathek",
   ],
-  Greece: [
-    "Cosmote TV",
-  ],
-  "Hong Kong": [
-    "hmvod",
-    "myTV SUPER",
-    "TVB Anywhere",
-  ],
-  Hungary: [
-    "OzoneTV",
-  ],
+  Greece: ["Cosmote TV"],
+  "Hong Kong": ["hmvod", "myTV SUPER", "TVB Anywhere"],
+  Hungary: ["OzoneTV"],
   India: [
     "Addatimes",
     "aha",
@@ -365,20 +321,10 @@ const webChannel = {
     "voot",
     "ZEE5",
   ],
-  Indonesia: [
-    "GoPlay",
-  ],
-  "Iran, Islamic Republic of": [
-    "shahrzadseries.com",
-  ],
-  Israel: [
-    "sdarot.tv",
-  ],
-  Italy: [
-    "Rai Gulp",
-    "RaiPlay",
-    "TIMvision",
-  ],
+  Indonesia: ["GoPlay"],
+  "Iran, Islamic Republic of": ["shahrzadseries.com"],
+  Israel: ["sdarot.tv"],
+  Italy: ["Rai Gulp", "RaiPlay", "TIMvision"],
   Japan: [
     "AbemaTV",
     "Animate.tv",
@@ -412,9 +358,7 @@ const webChannel = {
     "Yahoo! Japan",
     "Young Animal Densi",
   ],
-  Kazakhstan: [
-    "Aitube.kz",
-  ],
+  Kazakhstan: ["Aitube.kz"],
   "Korea, Republic of": [
     "Daum TvPot",
     "GomTV",
@@ -432,33 +376,13 @@ const webChannel = {
     "V LIVE",
     "wavve",
   ],
-  Malaysia: [
-    "iflix",
-  ],
-  Maldives: [
-    "Baiskoafu",
-  ],
-  Mexico: [
-    "Blim",
-  ],
-  Netherlands: [
-    "KPN Presenteert",
-    "LINDA.tv",
-    "NPO Start Plus",
-    "Videoland",
-  ],
-  Norway: [
-    "NRK TV",
-    "Null Video",
-    "TV 2 Sumo",
-    "VGTV",
-  ],
-  Philippines: [
-    "iWant",
-  ],
-  Portugal: [
-    "OPTO | SIC",
-  ],
+  Malaysia: ["iflix"],
+  Maldives: ["Baiskoafu"],
+  Mexico: ["Blim"],
+  Netherlands: ["KPN Presenteert", "LINDA.tv", "NPO Start Plus", "Videoland"],
+  Norway: ["NRK TV", "Null Video", "TV 2 Sumo", "VGTV"],
+  Philippines: ["iWant"],
+  Portugal: ["OPTO | SIC"],
   "Russian Federation": [
     "Chill",
     "ivi",
@@ -476,13 +400,8 @@ const webChannel = {
     "МТС ТВ",
     "Новый Иллюзион",
   ],
-  Senegal: [
-    "Marodi.TV",
-  ],
-  Singapore: [
-    "HOOQ",
-    "meWATCH",
-  ],
+  Senegal: ["Marodi.TV"],
+  Singapore: ["HOOQ", "meWATCH"],
   Spain: [
     "ATRESplayer PREMIUM",
     "HBO España",
@@ -490,11 +409,7 @@ const webChannel = {
     "Orange TV",
     "RTVE Playz",
   ],
-  Sweden: [
-    "C More",
-    "SVT Play",
-    "TV4 Play",
-  ],
+  Sweden: ["C More", "SVT Play", "TV4 Play"],
   "Taiwan, Province of China": [
     "CHOCO TV",
     "CHT MOD",
@@ -504,18 +419,8 @@ const webChannel = {
     "MyVideo",
     "Vidol",
   ],
-  Thailand: [
-    "AIS Play",
-    "Mello",
-  ],
-  Turkey: [
-    "beIN CONNECT",
-    "BluTV",
-    "Exxen",
-    "GAIN",
-    "Kanal D",
-    "Puhu TV",
-  ],
+  Thailand: ["AIS Play", "Mello"],
+  Turkey: ["beIN CONNECT", "BluTV", "Exxen", "GAIN", "Kanal D", "Puhu TV"],
 };
 
 export default webChannel;

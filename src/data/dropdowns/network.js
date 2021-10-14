@@ -507,7 +507,7 @@ const network = {
     "Yesterday",
     "YourTV",
   ],
-  "Canada": [
+  Canada: [
     "ABC Spark",
     "Aboriginal Peoples Television Network",
     "Action",
@@ -720,7 +720,7 @@ const network = {
     "Z",
     "Zeste",
   ],
-  "Australia": [
+  Australia: [
     "10 Bold",
     "10 Peach",
     "111",
@@ -846,7 +846,7 @@ const network = {
     "WORLD MOVIES",
     "WTV",
   ],
-  "Ireland": [
+  Ireland: [
     "City Channel Dublin",
     "CORK COMMUNITY TV",
     "Cúla4",
@@ -907,17 +907,10 @@ const network = {
     "TVNZ Kidzone24",
     "vibe",
   ],
-  "Afghanistan": [
-    "1TV",
-  ],
-  "Albania": [
-    "Top Channel",
-  ],
-  "Algeria": [
-    "Echorouk TV",
-    "TV1",
-  ],
-  "Argentina": [
+  Afghanistan: ["1TV"],
+  Albania: ["Top Channel"],
+  Algeria: ["Echorouk TV", "TV1"],
+  Argentina: [
     "América 2",
     "Canal 9",
     "CDA",
@@ -930,22 +923,10 @@ const network = {
     "TNT Latin America",
     "TV Pública",
   ],
-  "Armenia": [
-    "1TV",
-    "Armenia TV",
-    "Shant TV",
-  ],
-  "Austria": [
-    "ORF 1",
-    "ORF 2",
-    "PULS4",
-    "ServusTV",
-  ],
-  "Azerbaijan": [
-    "ATV",
-    "Space TV",
-  ],
-  "Belarus": [
+  Armenia: ["1TV", "Armenia TV", "Shant TV"],
+  Austria: ["ORF 1", "ORF 2", "PULS4", "ServusTV"],
+  Azerbaijan: ["ATV", "Space TV"],
+  Belarus: [
     "Беларусь 1",
     "Беларусь 2",
     "БЕЛСАТ TV",
@@ -953,7 +934,7 @@ const network = {
     "ОНТ",
     "Столичное телевидение",
   ],
-  "Belgium": [
+  Belgium: [
     "Be Séries",
     "Canvas",
     "één",
@@ -972,11 +953,8 @@ const network = {
     "VTM",
     "VTM 2",
   ],
-  "Bosnia and Herzegovina": [
-    "Federalna TV",
-    "Pink BH",
-  ],
-  "Brazil": [
+  "Bosnia and Herzegovina": ["Federalna TV", "Pink BH"],
+  Brazil: [
     "A&amp;E",
     "BHNews",
     "Canal Viva",
@@ -1005,13 +983,8 @@ const network = {
     "TV Rá-Tim-Bum",
     "Universal TV",
   ],
-  "Bulgaria": [
-    "BNT 1",
-    "bTV",
-    "bTV Cinema",
-    "Nova TV",
-  ],
-  "Chile": [
+  Bulgaria: ["BNT 1", "bTV", "bTV Cinema", "Nova TV"],
+  Chile: [
     "Canal 13",
     "Chilevisión",
     "HBO Latin America",
@@ -1019,7 +992,7 @@ const network = {
     "Mega",
     "TVN",
   ],
-  "China": [
+  China: [
     "Anhui TV",
     "Beijing TV",
     "CCTV-1",
@@ -1051,20 +1024,15 @@ const network = {
     "Zhejiang Children&#039;s Channel ZTV8",
     "Zhejiang TV",
   ],
-  "Colombia": [
+  Colombia: [
     "Canal Uno",
     "Caracol Televisión",
     "Fox Premium",
     "Fox Telecolombia",
     "RCN Televisión",
   ],
-  "Croatia": [
-    "HRT",
-    "NOVA TV",
-    "RTL",
-    "RTL 2",
-  ],
-  "Cyprus": [
+  Croatia: ["HRT", "NOVA TV", "RTL", "RTL 2"],
+  Cyprus: [
     "Mega One",
     "Mega Κύπρου",
     "ΑΝΤ1 Κύπρου",
@@ -1082,7 +1050,7 @@ const network = {
     "Prima televize",
     "TV Nova",
   ],
-  "Denmark": [
+  Denmark: [
     "C More",
     "Discovery Channel",
     "DR K",
@@ -1100,22 +1068,10 @@ const network = {
     "Xee",
     "youSee Comedy",
   ],
-  "Egypt": [
-    "CBC Drama",
-    "DMC",
-    "MBC Masr",
-    "ON",
-    "OSN",
-  ],
-  "Estonia": [
-    "ETV",
-    "Kanal 2",
-    "TV3",
-  ],
-  "Faroe Islands": [
-    "KVF",
-  ],
-  "Finland": [
+  Egypt: ["CBC Drama", "DMC", "MBC Masr", "ON", "OSN"],
+  Estonia: ["ETV", "Kanal 2", "TV3"],
+  "Faroe Islands": ["KVF"],
+  Finland: [
     "AVA",
     "C More Max",
     "Frii",
@@ -1131,7 +1087,7 @@ const network = {
     "Yle TV1",
     "Yle TV2",
   ],
-  "France": [
+  France: [
     "13ème RUE",
     "6ter",
     "Arte",
@@ -1171,14 +1127,9 @@ const network = {
     "TMC",
     "W9",
   ],
-  "French Polynesia": [
-    "Polynésie 1ère&#039;",
-  ],
-  "Georgia": [
-    "GDS TV",
-    "Rustavi 2 რ2",
-  ],
-  "Germany": [
+  "French Polynesia": ["Polynésie 1ère&#039;"],
+  Georgia: ["GDS TV", "Rustavi 2 რ2"],
+  Germany: [
     "13th Street Universal",
     "3sat",
     "Arte",
@@ -1214,7 +1165,7 @@ const network = {
     "ZDFinfo",
     "ZDFneo",
   ],
-  "Greece": [
+  Greece: [
     "Alpha",
     "Alter",
     "Mega",
@@ -1234,14 +1185,8 @@ const network = {
     "ΤΕΔ",
     "ΥΕΝΕΔ",
   ],
-  "Hong Kong": [
-    "BBC Earth",
-    "HKTV",
-    "TVB",
-    "TVB HD Jade",
-    "ViuTV",
-  ],
-  "Hungary": [
+  "Hong Kong": ["BBC Earth", "HKTV", "TVB", "TVB HD Jade", "ViuTV"],
+  Hungary: [
     "ATV",
     "Comedy Central",
     "Cool TV",
@@ -1265,12 +1210,8 @@ const network = {
     "VIASAT3",
     "VIASAT6",
   ],
-  "Iceland": [
-    "Ríkisútvarpið",
-    "Sjónvarp Símans",
-    "Stöð 2",
-  ],
-  "India": [
+  Iceland: ["Ríkisútvarpið", "Sjónvarp Símans", "Stöð 2"],
+  India: [
     "&amp;TV",
     "Asianet",
     "Bindass",
@@ -1292,17 +1233,10 @@ const network = {
     "TLC",
     "Zee TV",
   ],
-  "Indonesia": [
-    "Oh!K",
-    "Warner TV",
-  ],
-  "Iran, Islamic Republic of": [
-    "IRIB TV1",
-  ],
-  "Iraq": [
-    "Al Sharqiya",
-  ],
-  "Israel": [
+  Indonesia: ["Oh!K", "Warner TV"],
+  "Iran, Islamic Republic of": ["IRIB TV1"],
+  Iraq: ["Al Sharqiya"],
+  Israel: [
     "Channel 10",
     "Channel 2",
     "Disney Channel",
@@ -1313,7 +1247,7 @@ const network = {
     "Yes",
     "yesSTARS",
   ],
-  "Italy": [
+  Italy: [
     "Antenna 3",
     "Canale 5",
     "Cartoonito",
@@ -1333,7 +1267,7 @@ const network = {
     "Super!",
     "tv2000",
   ],
-  "Japan": [
+  Japan: [
     "ABC",
     "Akita Asahi Broadcasting",
     "Animax",
@@ -1384,16 +1318,14 @@ const network = {
     "WOWOW",
     "YTV",
   ],
-  "Kazakhstan": [
+  Kazakhstan: [
     "Astana TV",
     "КТК",
     "НТК",
     "Первый канал Казахстана",
     "Седьмой канал",
   ],
-  "Korea, Democratic People&#039;s Republic of": [
-    "KCTV",
-  ],
+  "Korea, Democratic People&#039;s Republic of": ["KCTV"],
   "Korea, Republic of": [
     "Anione TV",
     "Arirang TV",
@@ -1440,32 +1372,13 @@ const network = {
     "UMAX",
     "XtvN",
   ],
-  "Latvia": [
-    "1-й Балтийский канал",
-    "3+ (Прибалтика)",
-    "LNT",
-    "TV3",
-  ],
-  "Lebanon": [
-    "AL Jadeed",
-    "LBCI",
-    "MTV Lebanon",
-  ],
-  "Lithuania": [
-    "TV3",
-  ],
-  "Luxembourg": [
-    "RTL",
-  ],
-  "Malaysia": [
-    "8TV",
-    "Astro",
-    "Astro Wah Lai Toi",
-  ],
-  "Maldives": [
-    "Television Maldives",
-  ],
-  "Mexico": [
+  Latvia: ["1-й Балтийский канал", "3+ (Прибалтика)", "LNT", "TV3"],
+  Lebanon: ["AL Jadeed", "LBCI", "MTV Lebanon"],
+  Lithuania: ["TV3"],
+  Luxembourg: ["RTL"],
+  Malaysia: ["8TV", "Astro", "Astro Wah Lai Toi"],
+  Maldives: ["Television Maldives"],
+  Mexico: [
     "Azteca",
     "Blim",
     "Cadenatres",
@@ -1482,13 +1395,9 @@ const network = {
     "TNT (Latinoamérica)",
     "Unicable",
   ],
-  "Moldova, Republic of": [
-    "N4",
-  ],
-  "Mongolia": [
-    "UBS",
-  ],
-  "Netherlands": [
+  "Moldova, Republic of": ["N4"],
+  Mongolia: ["UBS"],
+  Netherlands: [
     "Animal Planet",
     "AT5",
     "Comedy Central",
@@ -1535,10 +1444,8 @@ const network = {
     "Viceland",
     "Ziggo Sport",
   ],
-  "Nigeria": [
-    "EbonyLife TV",
-  ],
-  "Norway": [
+  Nigeria: ["EbonyLife TV"],
+  Norway: [
     "BBC Earth",
     "Discovery",
     "FEM",
@@ -1555,21 +1462,9 @@ const network = {
     "TVNorge",
     "Viasat 4",
   ],
-  "Pakistan": [
-    "ARY Digital",
-    "Geo Entertainment",
-    "Hum TV",
-    "Urdu1",
-  ],
-  "Peru": [
-    "América Televisión",
-    "Latina Televisión",
-  ],
-  Philippines: [
-    "ABS-CBN",
-    "GMA",
-    "TV5",
-  ],
+  Pakistan: ["ARY Digital", "Geo Entertainment", "Hum TV", "Urdu1"],
+  Peru: ["América Televisión", "Latina Televisión"],
+  Philippines: ["ABS-CBN", "GMA", "TV5"],
   Poland: [
     "AXN",
     "Canal+",
@@ -1584,26 +1479,10 @@ const network = {
     "TVP2",
     "VIVA Polska",
   ],
-  Portugal: [
-    "MTV Portugal",
-    "RTP1",
-    "RTP2",
-    "SIC",
-    "SIC Mulher",
-    "TVI",
-  ],
-  "Puerto Rico": [
-    "WAPA-TV",
-  ],
-  Qatar: [
-    "Al Jazeera English",
-  ],
-  Romania: [
-    "Antena 1",
-    "HBO România",
-    "PRO TV",
-    "TVR 2",
-  ],
+  Portugal: ["MTV Portugal", "RTP1", "RTP2", "SIC", "SIC Mulher", "TVI"],
+  "Puerto Rico": ["WAPA-TV"],
+  Qatar: ["Al Jazeera English"],
+  Romania: ["Antena 1", "HBO România", "PRO TV", "TVR 2"],
   "Russian Federation": [
     "2x2",
     "9 канал Израиль+",
@@ -1671,10 +1550,7 @@ const network = {
     "Че (Перец) (ДТВ)",
     "Ю",
   ],
-  "Saudi Arabia": [
-    "Alarby Television",
-    "MBC1",
-  ],
+  "Saudi Arabia": ["Alarby Television", "MBC1"],
   Serbia: [
     "B92",
     "Pink",
@@ -1699,15 +1575,8 @@ const network = {
     "Suria",
     "Vasantham",
   ],
-  Slovakia: [
-    "RTVS",
-    "Televízia Markíza",
-    "TV JOJ",
-  ],
-  Slovenia: [
-    "Planet TV",
-    "RTVSLO",
-  ],
+  Slovakia: ["RTVS", "Televízia Markíza", "TV JOJ"],
+  Slovenia: ["Planet TV", "RTVSLO"],
   "South Africa": [
     "Africa Magic",
     "Animal Planet",
@@ -1770,12 +1639,7 @@ const network = {
     "TV6",
     "TV8",
   ],
-  Switzerland: [
-    "3+",
-    "RSI",
-    "RTS Un",
-    "SRF 1",
-  ],
+  Switzerland: ["3+", "RSI", "RTS Un", "SRF 1"],
   "Taiwan, Province of China": [
     "CTS",
     "CTV",
@@ -1818,13 +1682,8 @@ const network = {
     "Workpoint TV",
     "You Channel 143",
   ],
-  "Trinidad and Tobago": [
-    "CCN TV6",
-  ],
-  Tunisia: [
-    "Elhiwar Ettounsi",
-    "Nessma",
-  ],
+  "Trinidad and Tobago": ["CCN TV6"],
+  Tunisia: ["Elhiwar Ettounsi", "Nessma"],
   Turkey: [
     "ATV",
     "Cartoon Network",
@@ -1861,14 +1720,8 @@ const network = {
     "MBC Drama",
     "National Geographic Abu Dhabi",
   ],
-  "Venezuela, Bolivarian Republic of": [
-    "RCTV",
-    "Venevisión",
-  ],
-  "Viet Nam": [
-    "HTV",
-    "VTV3",
-  ],
+  "Venezuela, Bolivarian Republic of": ["RCTV", "Venevisión"],
+  "Viet Nam": ["HTV", "VTV3"],
 };
 
 export default network;

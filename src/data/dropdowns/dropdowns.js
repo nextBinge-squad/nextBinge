@@ -1,17 +1,11 @@
 // import country from './country';
-import genres from './genres';
-import language from './language';
-import network from './network';
-import webChannel from './webChannel';
+import genres from "./genres";
+import language from "./language";
+import network from "./network";
+import webChannel from "./webChannel";
 
 const dropdowns = {
-
-  status: [
-    "Running",
-    "Ended",
-    "To Be Determined",
-    "In Development",
-  ],
+  status: ["Running", "Ended", "To Be Determined", "In Development"],
 
   type: [
     "Scripted",
@@ -51,20 +45,11 @@ const dropdowns = {
     },
     {
       str: "Over 60 minutes",
-      val: [60, Infinity]
+      val: [60, Infinity],
     },
   ],
 
-  rating: [
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-  ],
-}
+  rating: [2, 3, 4, 5, 6, 7, 8, 9],
+};
 
 export default dropdowns;
